@@ -1,0 +1,47 @@
+nav {
+  background-color: #00887a;
+}
+h4 {
+  color: #bb2a81;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-add-board {
+  background: #bb2a81;
+}
+.cards {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-count: 3;
+}
+
+.card.board {
+  display: flex;
+  width: 31%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  height: 400px;
+}
+
+.board-list {
+  width: 100%;
+}
+.card.board-list-item {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.card.board-list-item:hover {
+  background: #a7ffeb;
+}

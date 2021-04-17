@@ -1,0 +1,13 @@
+.card {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  color: #25306c;
+  font-weight: bold;
+}
+
+.card:hover {
+  background: #f1b4d6;
+}
