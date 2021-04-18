@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Modal from '../Modal/Modal';
+import BaseModalWrapper from '../Modal/BaseModalWrapper';
 import Boards from './components/boards/Boards';
 
 const Main: React.FC = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = (): void => {
-    setModalVisible(wasModalVisible => !wasModalVisible);
+    setModalVisible((wasModalVisible) => !wasModalVisible);
   };
   return (
     <section>
@@ -14,14 +14,14 @@ const Main: React.FC = () => {
         <Link className="board-title mr-4" to="/boardCreate">
           Add Board
         </Link>
-        <button onClick={(): void => setModalActive(true)}>Modal</button>
+        <button onClick={toggleModal}>Modal</button>
       </div>
       <div className="container">
         <h1>My Boards</h1>
         <p>This is a training React-project. An analogue of the "Trello" service.</p>
         <Boards />
       </div>
-      <Modal active={modalActive} setActive={setModalActive} />
+      <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} />
     </section>
   );
 };
