@@ -4,7 +4,10 @@ import Modal from '../Modal/Modal';
 import Boards from './components/boards/Boards';
 
 const Main: React.FC = () => {
-  const [modalActive, setModalActive] = useState(true);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = (): void => {
+    setModalVisible(wasModalVisible => !wasModalVisible);
+  };
   return (
     <section>
       <div className="container mb-4">
