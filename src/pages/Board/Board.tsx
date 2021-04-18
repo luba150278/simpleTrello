@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { IBoardPage } from '../../interfaces/board-page-interface';
 import './board.css';
 
@@ -54,7 +54,8 @@ function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
 
   return (
     <>
-      <div className="board-header">
+      <div className="board-header container my-4">
+        <Link to="/">Home</Link>
         <h1>Boards Number: {match.params.id}</h1>
         <button className="btn btn-add-board mt-2">Add List</button>
       </div>
