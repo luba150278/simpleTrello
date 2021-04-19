@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ModalContainer = styled.div`
-  background-color: black;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@ export const DesktopModalContainer = styled(ModalContainer)`
   font-size: 26px;
 `;
 export const Header = styled.h3`
-  color: white;
+  color: #000000;
   font-size: 35px;
   line-height: 1em;
   font-weight: 300;
