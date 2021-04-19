@@ -15,10 +15,19 @@ export const DesktopModalContainer = styled(ModalContainer)`
   font-size: 26px;
 `;
 export const Header = styled.h3`
-  color: #000000;
+  color: #25306c;
   font-size: 35px;
   line-height: 1em;
-  font-weight: 300;
+  font-weight: bold;
   margin: 5px 0 10px;
   text-align: center;
+`;
+
+export const Close = styled.div`
+  position: absolute;
+  top: 0;
+  left: 80%;
+  &:hover {
+    cursor: pointer;
+  }
 `;

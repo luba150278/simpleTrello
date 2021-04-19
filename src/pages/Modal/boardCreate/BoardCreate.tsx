@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import api from '../../../../common/constans/api';
+import api from '../../../common/constans/api';
 import './boardCreate.css';
 
 type ITitle = {
@@ -15,18 +14,13 @@ const BoardCreate: React.FC = () => {
   const url = `${api.baseURL}/board`;
   return (
     <div className="container">
-      <Link to="/">Home</Link>
-      <h1>Board Creator</h1>
       <div className="fields mb-4">
         <div className="field mr-4">
-          <label htmlFor="title" className="label">
-            Board name
-          </label>
           <input onChange={changeHandler} value={title} type="text" id="title" placeholder="Enter board name" />
         </div>
       </div>
       <button
-        className="btn btn-success mr-2"
+        className="btn btn-success mr-2 btn-new-board"
         onClick={async (): Promise<Response> =>
           axios.post(url, newBoard, {
             headers: {
@@ -36,7 +30,7 @@ const BoardCreate: React.FC = () => {
           })
         }
       >
-        add use axios
+        Add board
       </button>
     </div>
   );

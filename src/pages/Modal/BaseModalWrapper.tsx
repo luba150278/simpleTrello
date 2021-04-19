@@ -1,6 +1,7 @@
 import React from 'react';
+import BoardCreate from './boardCreate/BoardCreate';
 import Modal from './Modal';
-import { DesktopModalContainer, Header } from './ModalPopup.styles';
+import { Close, DesktopModalContainer, Header } from './ModalPopup.styles';
 
 interface BaseModalWrapperProps {
   isModalVisible: boolean;
@@ -14,7 +15,9 @@ const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({ isModalVisible, onB
   return (
     <Modal onBackDropClick={onBackDropClick}>
       <DesktopModalContainer>
-        <Header>Modal Info</Header>
+        <Close onClick={(): void => onBackDropClick()}>x</Close>
+        <Header>Add new board</Header>
+        <BoardCreate />
       </DesktopModalContainer>
     </Modal>
   );
