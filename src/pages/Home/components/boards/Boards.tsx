@@ -23,12 +23,12 @@ const Boards: React.FC = () => {
   if (getBoards.boards.length > 0) {
     return (
       <div>
-        <div className="row">
+        <div className="row boards-row">
           {getBoards.boards.map((board) => (
             <Link
               to={`/board/${board.id}`}
               key={board.id}
-              className="card col-md-3 mx-2 mb-2"
+              className="card col-md-3 mx-2"
               style={{ background: `${colorGenerator()}` }}
             >
               {board.title}

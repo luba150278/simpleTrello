@@ -1,3 +1,6 @@
+.boards-row {
+  justify-content: space-between;
+}
 .card {
   height: 50px;
   display: flex;
@@ -6,4 +9,5 @@
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   color: #25306c;
   font-weight: bold;
+  margin-bottom: 20px;
 }
