@@ -19,7 +19,13 @@ const Main: React.FC = () => {
         <p>This is a training React-project. An analogue of the "Trello" service.</p>
         <Boards />
       </div>
-      <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} />
+      <BaseModalWrapper
+        isModalVisible={isModalVisible}
+        onBackDropClick={toggleModal}
+        startTitle=""
+        isCreate
+        urlEdit=""
+      />
     </section>
   );
 };

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import api from '../../../common/constans/api';
-import { DANGER_BOARD_NAME, SUCCESS_BOARD_NAME } from '../../../common/constans/messages';
+import { DANGER_BOARD_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
 import { Alert } from '../../../components/Alert';
 import './boardCreate.css';
 
@@ -20,8 +20,21 @@ async function postBoard(newBoard: ITitle): Promise<Response> {
   });
 }
 
-const BoardCreate: React.FC = () => {
-  const [title, setTitle] = useState<string>('');
+async function editBoard(newBoard: ITitle, urlEdit: string): Promise<Response> {
+  return axios.put(urlEdit, newBoard, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer 123',
+    },
+  });
+}
+type IProps = {
+  startTitle: string;
+  isCreate: boolean;
+  urlEdit: string;
+};
+const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
+  const [title, setTitle] = useState<string>(startTitle);
   const [isAlert, setAlert] = useState<boolean>(false);
   const [isDanger, setDanger] = useState<boolean>(false);
   const [textAlert, setTextAlert] = useState<string>('');
@@ -30,7 +43,6 @@ const BoardCreate: React.FC = () => {
 
   function isValidBoardTitle(titleBoard: string): boolean {
     const newStr = titleBoard.trim().replaceAll(/[а-яА-ЯёЁ]|[a-zA-z]|[0-9]|\s|,|-|_|\.+/gm, '');
-    console.log(`:${newStr}:${newStr.length}`);
     return newStr.length === 0 && titleBoard !== '';
   }
 
@@ -55,14 +67,18 @@ const BoardCreate: React.FC = () => {
         className="btn btn-success mr-2 btn-new-board"
         onClick={(): void => {
           if (isValidBoardTitle(title)) {
-            postBoard(newBoard);
-            setUpAlert(true, false, SUCCESS_BOARD_NAME);
+            if (isCreate) {
+              postBoard(newBoard);
+            } else {
+              editBoard(newBoard, urlEdit);
+            }
+            setUpAlert(true, false, isCreate ? SUCCESS_BOARD_NAME : SUCCESS_BOARD_NAME_EDIT);
           } else {
             setUpAlert(true, true, DANGER_BOARD_NAME);
           }
         }}
       >
-        Add board
+        {isCreate ? 'Add board' : 'Edit board'}
       </button>
     </div>
   );
