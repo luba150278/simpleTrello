@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, RouteComponentProps, useHistory } from 'react-router-dom';
 import api from '../../common/constans/api';
-import { IBoardPage } from '../../interfaces/board-page-interface';
+/* import { useActions } from '../../hooks/useActions'; */
+import { useTypeSelector } from '../../hooks/useTypeSelector';
 import BaseModalWrapper from '../Modal/BaseModalWrapper';
 import './board.css';
 
@@ -11,39 +12,19 @@ type TParams = { id: string };
 
 function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
   const history = useHistory();
-  const [list, setTodos] = useState<IBoardPage>();
+  const { getLists, error, loading } = useTypeSelector((state) => state.lists);
+  /*   const { fetchLists } = useActions();
   useEffect(() => {
-    const saved = {
-      title: 'My test board',
-      lists: [
-        {
-          id: 1,
-          title: 'Планы',
-          cards: [
-            { id: 1, title: 'помыть кота' },
-            { id: 2, title: 'приготовить суп' },
-            { id: 3, title: 'сходить в магазин' },
-          ],
-        },
-        {
-          id: 2,
-          title: 'В процессе',
-          cards: [{ id: 4, title: 'посмотреть сериал' }],
-        },
-        {
-          id: 3,
-          title: 'Сделано',
-          cards: [
-            { id: 5, title: 'сделать домашку' },
-            { id: 6, title: 'погулять с собакой' },
-          ],
-        },
-      ],
-    };
-    setTodos(saved);
-  }, []);
+    fetchLists(match.params.id);
+  }, [getLists]); */
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
-  const items = list?.lists.map((item) => {
+  if (error) {
+    return <h2>{error}</h2>;
+  }
+  const items = getLists?.lists.map((item) => {
     const elements = item.cards.map((cItem) => (
       <li key={cItem.id} className="card board-list-item">
         {cItem.title}
@@ -71,6 +52,19 @@ function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
     setModalVisible((wasModalVisible) => !wasModalVisible);
   };
 
+  type IList = {
+    title: string;
+    position: number;
+  };
+
+  async function addList(newList: IList): Promise<Response> {
+    return axios.post(`${url}/list`, newList, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer 123',
+      },
+    });
+  }
   return (
     <>
       <div className="board-header container my-4">
@@ -90,7 +84,15 @@ function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
             Delete
           </button>
         </div>
-        <button className="btn btn-add-board mt-2">Add List</button>
+        <button
+          className="btn btn-add-board mt-2"
+          onClick={(): void => {
+            const newList = { title: 'aaaa', position: 2 };
+            addList(newList);
+          }}
+        >
+          Add List
+        </button>
       </div>
       <div className="cards">{items}</div>
       <BaseModalWrapper
