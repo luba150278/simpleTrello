@@ -15,6 +15,14 @@ h4 {
 .btn-add-board {
   background: #bb2a81;
 }
+.board-header-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.deleteBoard {
+  height: 80%;
+}
 .cards {
   display: flex;
   width: 100%;

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import api from '../../common/constans/api';
 import { BoardsAction, BoardsActionTypes } from '../types/boards';
 
+const url = `${api.baseURL}/board`;
 export const fetchBoards = () => async (dispatch: Dispatch<BoardsAction>): Promise<void> => {
   try {
     dispatch({ type: BoardsActionTypes.FETCH_BOARDS });
-    const response = await axios.get('https://trello-back.shpp.me/lmyetolkina/api/v1/board', {
+    const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer 123',
