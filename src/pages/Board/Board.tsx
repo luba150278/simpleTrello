@@ -11,7 +11,10 @@ import './board.css';
 type TParams = { id: string };
 
 const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
+  const history = useHistory();
+  const url = `${api.baseURL}/board/${match.params.id}`;
   const { getLists, error, loading } = useTypeSelector((state) => state.lists);
+  const { deleteBoard } = useActions();
   const { fetchLists } = useActions();
   useEffect(() => {
     fetchLists(match.params.id);
@@ -23,17 +26,6 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
 
   if (error) {
     return <h2>{error}</h2>;
-  }
-
-  const history = useHistory();
-  const url = `${api.baseURL}/board/${match.params.id}`;
-  async function deleteBoard(): Promise<Response> {
-    return axios.delete(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer 123',
-      },
-    });
   }
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -91,7 +83,7 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
           <button
             className="btn btn-danger deleteBoard ml-4"
             onClick={(): void => {
-              deleteBoard();
+              deleteBoard(url);
               history.push('/');
             }}
           >
