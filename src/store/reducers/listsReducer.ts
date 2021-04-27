@@ -2,21 +2,8 @@ import { ListsAction, ListsActionTypes, ListsState } from '../types/lists';
 
 const initialState: ListsState = {
   getLists: {
-    users: [{ id: 1, username: 'dff' }],
-    lists: [
-      {
-        id: 1,
-        title: 'to do',
-        cards: [
-          {
-            id: 1,
-            title: 'to buy a cat',
-            description: 'dfdf',
-            users: [1],
-          },
-        ],
-      },
-    ],
+    users: [],
+    lists: [],
   },
   loading: false,
   error: null,

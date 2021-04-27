@@ -7,7 +7,6 @@ import { ListsAction, ListsActionTypes } from '../types/lists';
 export const fetchLists = (id: string) => async (dispatch: Dispatch<ListsAction>): Promise<void> => {
   const url = `${api.baseURL}/board/${id}`;
   try {
-    dispatch({ type: ListsActionTypes.FETCH_LISTS });
     const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',

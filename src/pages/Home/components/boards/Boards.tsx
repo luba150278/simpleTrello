@@ -7,11 +7,19 @@ import { useTypeSelector } from '../../../../hooks/useTypeSelector';
 import './boards.css';
 
 const Boards: React.FC = () => {
+  /*   const dispatch = useDispatch();
+  const usersList = useSelector(state => state.usersList);
+  const { loading, error, users } = usersList;
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]); */
+
   const { getBoards, error, loading } = useTypeSelector((state) => state.boards);
   const { fetchBoards } = useActions();
   useEffect(() => {
     fetchBoards();
   }, []);
+
   if (loading) {
     return <h2>Loading...</h2>;
   }

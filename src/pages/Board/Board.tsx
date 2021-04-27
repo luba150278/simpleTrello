@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, RouteComponentProps, useHistory } from 'react-router-dom';
 import api from '../../common/constans/api';
-/* import { useActions } from '../../hooks/useActions'; */
+import { useActions } from '../../hooks/useActions';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import BaseModalWrapper from '../Modal/BaseModalWrapper';
 import './board.css';
 
 type TParams = { id: string };
 
-function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
-  const history = useHistory();
+const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const { getLists, error, loading } = useTypeSelector((state) => state.lists);
-  /*   const { fetchLists } = useActions();
+  const { fetchLists } = useActions();
   useEffect(() => {
     fetchLists(match.params.id);
-  }, [getLists]); */
+  }, []);
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -24,19 +24,8 @@ function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
   if (error) {
     return <h2>{error}</h2>;
   }
-  const items = getLists?.lists.map((item) => {
-    const elements = item.cards.map((cItem) => (
-      <li key={cItem.id} className="card board-list-item">
-        {cItem.title}
-      </li>
-    ));
-    return (
-      <div className="card board" key={item.id}>
-        <h4>{item.title}</h4>
-        <ul className="board-list">{elements}</ul>
-      </div>
-    );
-  });
+
+  const history = useHistory();
   const url = `${api.baseURL}/board/${match.params.id}`;
   async function deleteBoard(): Promise<Response> {
     return axios.delete(url, {
@@ -65,6 +54,31 @@ function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
       },
     });
   }
+  const arr = Object.keys(getLists.lists);
+  const arrLenght = arr.length;
+  const lists =
+    arrLenght !== 0 ? (
+      Object.keys(getLists.lists).map((id) => {
+        const list = getLists.lists[Number(id)];
+        const cards = Object.keys(list.cards).map((idCard) => {
+          const card = getLists.lists[Number(idCard)];
+          return (
+            <li key={card.id} className="card board-list-item">
+              {card.title}
+            </li>
+          );
+        });
+        return (
+          <div className="card board" key={list.id}>
+            <h4>{list.title}</h4>
+            <ul className="board-list">{cards}</ul>
+          </div>
+        );
+      })
+    ) : (
+      <h2>Any lists yet. Create your first list!</h2>
+    );
+
   return (
     <>
       <div className="board-header container my-4">
@@ -94,7 +108,7 @@ function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
           Add List
         </button>
       </div>
-      <div className="cards">{items}</div>
+      <div className="cards">{lists}</div>
       <BaseModalWrapper
         isModalVisible={isModalVisible}
         onBackDropClick={toggleModal}
@@ -102,9 +116,8 @@ function Board({ match }: RouteComponentProps<TParams>): JSX.Element {
         isCreate={false}
         urlEdit={url}
       />
-      ;
     </>
   );
-}
+};
 
 export default Board;
