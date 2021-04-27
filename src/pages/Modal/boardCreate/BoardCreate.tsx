@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import axios from 'axios';
 import React, { useState } from 'react';
 // import api from '../../../common/constans/api';
 import { DANGER_BOARD_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
@@ -7,28 +6,10 @@ import { Alert } from '../../../components/Alert';
 import { useActions } from '../../../hooks/useActions';
 import './boardCreate.css';
 
-// const url = `${api.baseURL}/board`;
 type ITitle = {
   title: string;
 };
 
-/* async function postBoard(newBoard: ITitle): Promise<Response> {
-  return axios.post(url, newBoard, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer 123',
-    },
-  });
-} */
-
-async function editBoard(newBoard: ITitle, urlEdit: string): Promise<Response> {
-  return axios.put(urlEdit, newBoard, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer 123',
-    },
-  });
-}
 type IProps = {
   startTitle: string;
   isCreate: boolean;
@@ -42,9 +23,8 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
   const newBoard: ITitle = { title };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addBoard } = useActions();
-  /*   useEffect(() => {
-    addBoard(newBoard);
-  }, []); */
+  const { editBoard } = useActions();
+  const { fetchBoards } = useActions();
 
   function isValidBoardTitle(titleBoard: string): boolean {
     const newStr = titleBoard.trim().replaceAll(/[а-яА-ЯёЁ]|[a-zA-z]|[0-9]|\s|,|-|_|\.+/gm, '');
@@ -73,10 +53,11 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
         onClick={(): void => {
           if (isValidBoardTitle(title)) {
             if (isCreate) {
-              // postBoard(newBoard);
               addBoard(newBoard);
+              fetchBoards();
             } else {
               editBoard(newBoard, urlEdit);
+              fetchBoards();
             }
             setUpAlert(true, false, isCreate ? SUCCESS_BOARD_NAME : SUCCESS_BOARD_NAME_EDIT);
           } else {
