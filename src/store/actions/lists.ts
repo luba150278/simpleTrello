@@ -7,6 +7,7 @@ import { ListsAction, ListsActionTypes } from '../types/lists';
 export const fetchLists = (id: string) => async (dispatch: Dispatch<ListsAction>): Promise<void> => {
   const url = `${api.baseURL}/board/${id}`;
   try {
+    // dispatch({ type: ListsActionTypes.FETCH_LISTS });
     const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -15,6 +16,6 @@ export const fetchLists = (id: string) => async (dispatch: Dispatch<ListsAction>
     });
     dispatch({ type: ListsActionTypes.FETCH_LISTS_SUCCESS, payload: response.data });
   } catch (e) {
-    dispatch({ type: ListsActionTypes.FETCH_LISTS_ERROR, payload: "Error. Boards info don't load" });
+    dispatch({ type: ListsActionTypes.FETCH_LISTS_ERROR, payload: "Error. Boards info didn't load" });
   }
 };

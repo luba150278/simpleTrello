@@ -1,22 +1,19 @@
-interface IBoard {
-  title: string;
-}
-
 export enum AddBoardActionTypes {
   ADD_BOARD = 'ADD_BOARD',
   ADD_BOARD_SUCCESS = 'ADD_BOARD_SUCCESS',
   ADD_BOARD_ERROR = 'ADD_BOARD_ERROR',
 }
 
-interface AddBoardAction {
-  type: AddBoardActionTypes.ADD_BOARD;
+export interface AddBoardState {
+  added: boolean;
+  error: null | string;
 }
 interface AddBoardSuccessAction {
   type: AddBoardActionTypes.ADD_BOARD_SUCCESS;
-  payload: IBoard;
+  payload: boolean;
 }
 interface AddBoardErrorAction {
   type: AddBoardActionTypes.ADD_BOARD_ERROR;
   payload: string;
 }
-export type AddBoardActions = AddBoardAction | AddBoardSuccessAction | AddBoardErrorAction;
+export type AddBoardActions = AddBoardSuccessAction | AddBoardErrorAction;

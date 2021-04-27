@@ -1,24 +1,25 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import React, { useState } from 'react';
-import api from '../../../common/constans/api';
+// import api from '../../../common/constans/api';
 import { DANGER_BOARD_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
 import { Alert } from '../../../components/Alert';
+import { useActions } from '../../../hooks/useActions';
 import './boardCreate.css';
 
-const url = `${api.baseURL}/board`;
+// const url = `${api.baseURL}/board`;
 type ITitle = {
   title: string;
 };
 
-async function postBoard(newBoard: ITitle): Promise<Response> {
+/* async function postBoard(newBoard: ITitle): Promise<Response> {
   return axios.post(url, newBoard, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer 123',
     },
   });
-}
+} */
 
 async function editBoard(newBoard: ITitle, urlEdit: string): Promise<Response> {
   return axios.put(urlEdit, newBoard, {
@@ -40,6 +41,10 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
   const [textAlert, setTextAlert] = useState<string>('');
   const newBoard: ITitle = { title };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
+  const { addBoard } = useActions();
+  /*   useEffect(() => {
+    addBoard(newBoard);
+  }, []); */
 
   function isValidBoardTitle(titleBoard: string): boolean {
     const newStr = titleBoard.trim().replaceAll(/[а-яА-ЯёЁ]|[a-zA-z]|[0-9]|\s|,|-|_|\.+/gm, '');
@@ -68,7 +73,8 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
         onClick={(): void => {
           if (isValidBoardTitle(title)) {
             if (isCreate) {
-              postBoard(newBoard);
+              // postBoard(newBoard);
+              addBoard(newBoard);
             } else {
               editBoard(newBoard, urlEdit);
             }
