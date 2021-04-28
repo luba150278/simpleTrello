@@ -1,11 +1,5 @@
-interface IBoard {
-  id: number;
-  title: string;
-}
+import { IBoards } from '../../interfaces/inrefaces';
 
-interface IBoards {
-  boards: IBoard[];
-}
 export interface BoardsState {
   getBoards: IBoards;
   loading: boolean;

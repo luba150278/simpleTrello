@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-// import api from '../../../common/constans/api';
 import { DANGER_BOARD_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
 import { Alert } from '../../../components/Alert';
 import { useActions } from '../../../hooks/useActions';
