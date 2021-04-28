@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypeSelector } from '../../../../hooks/useTypeSelector';
+import AddList from '../AddList/AddList';
 
-type ID = {
+type Props = {
+  url: string;
   boardID: string;
 };
 
-const Lists: React.FC<ID> = ({ boardID }) => {
+const Lists: React.FC<Props> = ({ url, boardID }) => {
   const { getLists, error, loading } = useTypeSelector((state) => state.lists);
   const { fetchLists } = useActions();
   useEffect(() => {
@@ -45,7 +47,13 @@ const Lists: React.FC<ID> = ({ boardID }) => {
       <h2>Any lists yet. Create your first list!</h2>
     );
 
-  return <div className="cards">{lists}</div>;
+  return (
+    <div className="d-flex">
+      <AddList url={url} countLists={arrLenght} />
+      <p id="countLists">Количество списков: {arrLenght}</p>
+      <div className="cards">{lists}</div>
+    </div>
+  );
 };
 
 export default Lists;

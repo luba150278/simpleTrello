@@ -1,15 +1,20 @@
+/* eslint-disable no-console */
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 
-type IUrl = {
+type Props = {
   url: string;
+  countLists: number;
 };
 
-const AddList: React.FC<IUrl> = ({ url }) => {
-  type IList = {
-    title: string;
-    position: number;
-  };
+type IList = {
+  title: string;
+  position: number;
+};
+
+const AddList: React.FC<Props> = ({ url, countLists }) => {
+  const [title, setTitle] = useState<string>('');
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
 
   async function addList(newList: IList): Promise<Response> {
     return axios.post(`${url}/list`, newList, {
@@ -19,14 +24,13 @@ const AddList: React.FC<IUrl> = ({ url }) => {
       },
     });
   }
-
   return (
     <div>
-      <input type="text" id="addList" placeholder="Enter list name" />
+      <input type="text" id="addList" placeholder="Enter list name" onChange={changeHandler} value={title} />
       <button
         className="btn btn-add-board mt-2"
         onClick={(): void => {
-          const newList = { title: 'aaaa', position: 2 };
+          const newList = { title, position: countLists + 1 };
           addList(newList);
         }}
       >

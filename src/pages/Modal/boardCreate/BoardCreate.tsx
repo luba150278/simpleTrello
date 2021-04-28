@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { DANGER_BOARD_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
 import { Alert } from '../../../components/Alert';
+import { isValidTitle } from '../../../functions/validTitles';
 import { useActions } from '../../../hooks/useActions';
 import './boardCreate.css';
 
@@ -25,11 +26,6 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
   const { editBoard } = useActions();
   const { fetchBoards } = useActions();
 
-  function isValidBoardTitle(titleBoard: string): boolean {
-    const newStr = titleBoard.trim().replaceAll(/[а-яА-ЯёЁ]|[a-zA-z]|[0-9]|\s|,|-|_|\.+/gm, '');
-    return newStr.length === 0 && titleBoard !== '';
-  }
-
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
     setDanger(dang);
@@ -50,7 +46,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
       <button
         className="btn btn-success mr-2 btn-new-board"
         onClick={(): void => {
-          if (isValidBoardTitle(title)) {
+          if (isValidTitle(title)) {
             if (isCreate) {
               addBoard(newBoard);
               fetchBoards();
