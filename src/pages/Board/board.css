@@ -1,19 +1,12 @@
 nav {
   background-color: #00887a;
 }
-h4 {
-  color: #bb2a81;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
+
 .board-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-}
-.btn-add-board {
-  background: #bb2a81;
 }
 .board-header-title {
   display: flex;
@@ -31,28 +24,4 @@ h4 {
   flex-direction: row;
   flex-wrap: wrap;
   column-count: 3;
-}
-
-.card.board {
-  display: flex;
-  width: 31%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 10px;
-  min-height: 50px;
-}
-
-.board-list {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-.card.board-list-item {
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.card.board-list-item:hover {
-  background: #a7ffeb;
 }

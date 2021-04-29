@@ -1,0 +1,68 @@
+.lists-main {
+  display: flex;
+  flex-direction: column;
+}
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.count-lists {
+  font-weight: 700;
+}
+
+.card.list {
+  display: flex;
+  width: 31%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  min-height: 50px;
+  height: auto;
+}
+.listTitle {
+  color: #bb2a81;
+  font-weight: 500;
+  margin-bottom: 20px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.listTitle:focus {
+  color: green;
+  cursor: text;
+  border: none;
+  outline: none;
+}
+
+.list-items {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.card.list-item {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.card.list-item:hover {
+  background: #a7ffeb;
+}
+.icon__inner {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.trash-list {
+  color: #000;
+  size: 1em;
+}
+
+.trash-list:hover {
+  color: #bb2a81;
+  cursor: pointer;
+}

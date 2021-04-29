@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { DANGER_BOARD_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
+import { DANGER_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
 import { Alert } from '../../../components/Alert';
 import { isValidTitle } from '../../../functions/validTitles';
 import { useActions } from '../../../hooks/useActions';
@@ -49,14 +49,13 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
           if (isValidTitle(title)) {
             if (isCreate) {
               addBoard(newBoard);
-              fetchBoards();
             } else {
               editBoard(newBoard, urlEdit);
-              fetchBoards();
             }
+            fetchBoards();
             setUpAlert(true, false, isCreate ? SUCCESS_BOARD_NAME : SUCCESS_BOARD_NAME_EDIT);
           } else {
-            setUpAlert(true, true, DANGER_BOARD_NAME);
+            setUpAlert(true, true, DANGER_NAME);
           }
         }}
       >

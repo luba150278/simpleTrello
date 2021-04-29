@@ -3,6 +3,8 @@ import * as ListsActionCreators from './lists';
 import * as BoardActionCreators from './boardPost';
 import * as BoardEditActionCreators from './editBoard';
 import * as BoardDeleteActionCreators from './boardDelete';
+import * as ListAddActionCreators from './listAdd';
+import * as ListDeleteActionCreators from './listDelete';
 
 export default {
   ...BoardsActionCreators,
@@ -10,4 +12,6 @@ export default {
   ...BoardActionCreators,
   ...BoardEditActionCreators,
   ...BoardDeleteActionCreators,
+  ...ListAddActionCreators,
+  ...ListDeleteActionCreators,
 };

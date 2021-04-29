@@ -1,7 +1,11 @@
+/* eslint-disable no-console */
 import React, { useEffect } from 'react';
+import { IconContext } from 'react-icons';
+import { FaTrashAlt } from 'react-icons/fa';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypeSelector } from '../../../../hooks/useTypeSelector';
 import AddList from '../AddList/AddList';
+import './lists.css';
 
 type Props = {
   url: string;
@@ -9,7 +13,10 @@ type Props = {
 };
 
 const Lists: React.FC<Props> = ({ url, boardID }) => {
+  // const [title, setTitle] = useState<string>('');
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => console.log(event.target.value);
   const { getLists, error, loading } = useTypeSelector((state) => state.lists);
+  const { deleteList } = useActions();
   const { fetchLists } = useActions();
   useEffect(() => {
     fetchLists(boardID);
@@ -28,18 +35,36 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
     arrLenght !== 0 ? (
       Object.keys(getLists.lists).map((id) => {
         const list = getLists.lists[Number(id)];
+        // setTitle(list.title);
         const cards = Object.keys(list.cards).map((idCard) => {
           const card = getLists.lists[Number(idCard)];
           return (
-            <li key={card.id} className="card board-list-item">
+            <li key={card.id} className="card list-item">
               {card.title}
             </li>
           );
         });
+
         return (
-          <div className="card board" key={list.id}>
-            <h4>{list.title}</h4>
-            <ul className="board-list">{cards}</ul>
+          <div className="card list" key={list.id}>
+            <div className="icon__inner">
+              <IconContext.Provider value={{ className: 'trash-list' }}>
+                <FaTrashAlt
+                  onClick={(): void => {
+                    deleteList(`${url}/list/${id}`);
+                    fetchLists(boardID);
+                  }}
+                />
+              </IconContext.Provider>
+            </div>
+            <input
+              type="text"
+              className="listTitle"
+              placeholder={list.title}
+              value={list.title}
+              onChange={changeHandler}
+            />
+            <ul className="list-items">{cards}</ul>
           </div>
         );
       })
@@ -48,9 +73,11 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
     );
 
   return (
-    <div className="d-flex">
-      <AddList url={url} countLists={arrLenght} />
-      <p id="countLists">Количество списков: {arrLenght}</p>
+    <div className="lists-main">
+      <div className="input-row mb-4">
+        <AddList url={url} countLists={arrLenght} boardID={boardID} />
+        <div className="count-lists">Всего списков: {arrLenght}</div>
+      </div>
       <div className="cards">{lists}</div>
     </div>
   );

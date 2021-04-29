@@ -1,0 +1,8 @@
+.list-input-outside {
+  display: flex;
+  flex-direction: column;
+}
+.list-input {
+  display: flex;
+  align-items: center;
+}
