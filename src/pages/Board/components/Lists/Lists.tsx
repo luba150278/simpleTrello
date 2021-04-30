@@ -39,14 +39,14 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
         const cards = Object.keys(list.cards).map((idCard) => {
           const card = getLists.lists[Number(idCard)];
           return (
-            <li key={card.id} className="card list-item">
+            <li key={card.id} className="card list-item row">
               {card.title}
             </li>
           );
         });
 
         return (
-          <div className="card list" key={list.id}>
+          <div className="card list col-md-3 mx-2" key={list.id}>
             <div className="icon__inner">
               <IconContext.Provider value={{ className: 'trash-list' }}>
                 <FaTrashAlt
@@ -78,7 +78,7 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
         <AddList url={url} countLists={arrLenght} boardID={boardID} />
         <div className="count-lists">Всего списков: {arrLenght}</div>
       </div>
-      <div className="cards">{lists}</div>
+      <div className="cards row">{lists}</div>
     </div>
   );
 };

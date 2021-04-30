@@ -1,8 +1,9 @@
 .boards-row {
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .card {
-  height: 50px;
+  min-height: 50px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;

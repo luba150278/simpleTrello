@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .count-lists {
@@ -14,7 +15,6 @@
 
 .card.list {
   display: flex;
-  width: 31%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -30,6 +30,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   text-align: center;
+  width: 100%;
 }
 
 .listTitle:focus {
