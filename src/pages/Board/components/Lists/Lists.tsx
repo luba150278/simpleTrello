@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IconContext } from 'react-icons';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypeSelector } from '../../../../hooks/useTypeSelector';
+import AddCard from '../AddCard/AddCard';
 import AddList from '../AddList/AddList';
 import './lists.css';
 
@@ -13,7 +14,11 @@ type Props = {
 };
 
 const Lists: React.FC<Props> = ({ url, boardID }) => {
-  // const [title, setTitle] = useState<string>('');
+  const [isCardAddVisible, setCardAddVisible] = useState(false);
+  // const [isPlusIconVisible, setPlusIconVisible] = useState(true);
+  const toggleCardAdd = (): void => {
+    setCardAddVisible((wasVisible) => !wasVisible);
+  };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => console.log(event.target.value);
   const { getLists, error, loading } = useTypeSelector((state) => state.lists);
   const { deleteList } = useActions();
@@ -31,16 +36,18 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
   }
   const arr = Object.keys(getLists.lists);
   const arrLenght = arr.length;
+
   const lists =
     arrLenght !== 0 ? (
       Object.keys(getLists.lists).map((id) => {
         const list = getLists.lists[Number(id)];
-        // setTitle(list.title);
         const cards = Object.keys(list.cards).map((idCard) => {
-          const card = getLists.lists[Number(idCard)];
+          const card = list.cards[Number(idCard)];
+          console.log(card.description);
           return (
-            <li key={card.id} className="card list-item row">
-              {card.title}
+            <li key={card.id} className="card list-item">
+              <h4>{card.title}</h4>
+              {card.description !== '' ? <p>{card.description}</p> : null}
             </li>
           );
         });
@@ -57,6 +64,7 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
                 />
               </IconContext.Provider>
             </div>
+            <p>{list.position}</p>
             <input
               type="text"
               className="listTitle"
@@ -65,6 +73,14 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
               onChange={changeHandler}
             />
             <ul className="list-items">{cards}</ul>
+            <div className="iconPlus__inner">
+              <IconContext.Provider value={{ className: 'trash-list' }}>
+                <FaPlus onClick={toggleCardAdd} />
+              </IconContext.Provider>
+            </div>
+            {isCardAddVisible ? (
+              <AddCard url={url} position={list.position} list_id={list.id} boardID={boardID} />
+            ) : null}
           </div>
         );
       })

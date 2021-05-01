@@ -1,24 +1,26 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { DANGER_NAME, SUCCESS_LIST_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
-import './addList.css';
+import './addCard.css';
 
 type Props = {
   url: string;
-  countLists: number;
+  position: number;
+  list_id: number;
   boardID: string;
 };
 
-const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
+const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
   const [title, setTitle] = useState<string>('');
+  // const [description, setDesc] = useState<string>('');
   const [isAlert, setAlert] = useState<boolean>(false);
   const [isDanger, setDanger] = useState<boolean>(false);
   const [textAlert, setTextAlert] = useState<string>('');
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  const { addList } = useActions();
+  // const changeHandlerDesc = (event: React.ChangeEvent<HTMLTextAreaElement>): void => setDesc(event.target.value);
+  const { addCard } = useActions();
   const { fetchLists } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
@@ -32,28 +34,42 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
   }
 
   return (
-    <div className="list-input-outside">
+    <div className="card-input-outside">
       <Alert show={isAlert} text={textAlert} danger={isDanger} />
-      <div className="list-input mt-2">
-        <input type="text" id="addList" placeholder="Enter list name" onChange={changeHandler} value={title} />
+      <div className="card-input mt-2">
+        <input
+          className="card-title"
+          type="text"
+          id="cardTitle"
+          placeholder="Enter card title"
+          onChange={changeHandler}
+          value={title}
+        />
+        {/*         <textarea
+          className="card-desc"
+          id="cardDesc"
+          placeholder="Enter card description"
+          onChange={changeHandlerDesc}
+          value={description}
+        /> */}
         <button
           className="btn btn-primary ml-2"
           onClick={(): void => {
             if (isValidTitle(title)) {
-              const newList = { title, position: countLists + 1 };
-              addList(`${url}/list`, newList);
-              setUpAlert(true, false, SUCCESS_LIST_NAME);
+              const newCard = { title, list_id, position };
+              addCard(`${url}/card`, newCard);
               fetchLists(boardID);
+              setUpAlert(true, false, SUCCESS_LIST_NAME);
             } else {
               setUpAlert(true, true, DANGER_NAME);
             }
           }}
         >
-          Add List
+          Add Card
         </button>
       </div>
     </div>
   );
 };
 
-export default AddList;
+export default AddCard;

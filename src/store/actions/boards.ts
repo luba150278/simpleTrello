@@ -6,7 +6,7 @@ import { BoardsAction, BoardsActionTypes } from '../types/boards';
 const url = `${api.baseURL}/board`;
 export const fetchBoards = () => async (dispatch: Dispatch<BoardsAction>): Promise<void> => {
   try {
-    dispatch({ type: BoardsActionTypes.FETCH_BOARDS });
+    // dispatch({ type: BoardsActionTypes.FETCH_BOARDS });
     const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',

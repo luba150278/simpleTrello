@@ -5,6 +5,7 @@ import * as BoardEditActionCreators from './editBoard';
 import * as BoardDeleteActionCreators from './boardDelete';
 import * as ListAddActionCreators from './listAdd';
 import * as ListDeleteActionCreators from './listDelete';
+import * as CardAddActionCreators from './cardAdd';
 
 export default {
   ...BoardsActionCreators,
@@ -14,4 +15,5 @@ export default {
   ...BoardDeleteActionCreators,
   ...ListAddActionCreators,
   ...ListDeleteActionCreators,
+  ...CardAddActionCreators,
 };

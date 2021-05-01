@@ -49,10 +49,12 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
           if (isValidTitle(title)) {
             if (isCreate) {
               addBoard(newBoard);
+              fetchBoards();
             } else {
               editBoard(newBoard, urlEdit);
+              fetchBoards();
             }
-            fetchBoards();
+            // fetchBoards();
             setUpAlert(true, false, isCreate ? SUCCESS_BOARD_NAME : SUCCESS_BOARD_NAME_EDIT);
           } else {
             setUpAlert(true, true, DANGER_NAME);
