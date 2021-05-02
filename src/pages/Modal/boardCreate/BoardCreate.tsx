@@ -22,9 +22,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
   const [textAlert, setTextAlert] = useState<string>('');
   const newBoard: ITitle = { title };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  const { addBoard } = useActions();
-  const { editBoard } = useActions();
-  const { fetchBoards } = useActions();
+  const { addBoard, editBoard, fetchBoards } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
@@ -49,12 +47,10 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
           if (isValidTitle(title)) {
             if (isCreate) {
               addBoard(newBoard);
-              fetchBoards();
             } else {
               editBoard(newBoard, urlEdit);
-              fetchBoards();
             }
-            // fetchBoards();
+            fetchBoards();
             setUpAlert(true, false, isCreate ? SUCCESS_BOARD_NAME : SUCCESS_BOARD_NAME_EDIT);
           } else {
             setUpAlert(true, true, DANGER_NAME);

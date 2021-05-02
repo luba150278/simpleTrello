@@ -20,8 +20,7 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
   const [textAlert, setTextAlert] = useState<string>('');
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   // const changeHandlerDesc = (event: React.ChangeEvent<HTMLTextAreaElement>): void => setDesc(event.target.value);
-  const { addCard } = useActions();
-  const { fetchLists } = useActions();
+  const { addCard, fetchLists } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
@@ -40,7 +39,7 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
         <input
           className="card-title"
           type="text"
-          id="cardTitle"
+          // id="cardTitle"
           placeholder="Enter card title"
           onChange={changeHandler}
           value={title}

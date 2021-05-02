@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { Spinner } from 'reactstrap';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypeSelector } from '../../../../hooks/useTypeSelector';
 import AddCard from '../AddCard/AddCard';
@@ -15,20 +16,18 @@ type Props = {
 
 const Lists: React.FC<Props> = ({ url, boardID }) => {
   const [isCardAddVisible, setCardAddVisible] = useState(false);
-  // const [isPlusIconVisible, setPlusIconVisible] = useState(true);
   const toggleCardAdd = (): void => {
     setCardAddVisible((wasVisible) => !wasVisible);
   };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => console.log(event.target.value);
   const { getLists, error, loading } = useTypeSelector((state) => state.lists);
-  const { deleteList } = useActions();
-  const { fetchLists } = useActions();
+  const { deleteList, fetchLists } = useActions();
   useEffect(() => {
     fetchLists(boardID);
   }, []);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <Spinner color="success" />;
   }
 
   if (error) {
@@ -43,7 +42,7 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
         const list = getLists.lists[Number(id)];
         const cards = Object.keys(list.cards).map((idCard) => {
           const card = list.cards[Number(idCard)];
-          console.log(card.description);
+
           return (
             <li key={card.id} className="card list-item">
               <h4>{card.title}</h4>
@@ -53,13 +52,13 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
         });
 
         return (
-          <div className="card list col-md-3 mx-2" key={list.id}>
+          <div className="card list mx-2" key={list.id}>
             <div className="icon__inner">
               <IconContext.Provider value={{ className: 'trash-list' }}>
                 <FaTrashAlt
                   onClick={(): void => {
                     deleteList(`${url}/list/${id}`);
-                    fetchLists(boardID);
+                    // fetchLists(boardID);
                   }}
                 />
               </IconContext.Provider>
@@ -94,7 +93,7 @@ const Lists: React.FC<Props> = ({ url, boardID }) => {
         <AddList url={url} countLists={arrLenght} boardID={boardID} />
         <div className="count-lists">Всего списков: {arrLenght}</div>
       </div>
-      <div className="cards row">{lists}</div>
+      <div className="cards">{lists}</div>
     </div>
   );
 };

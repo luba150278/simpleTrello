@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Spinner } from 'reactstrap';
 import { colorGenerator } from '../../../../functions/cardColorGenerator';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypeSelector } from '../../../../hooks/useTypeSelector';
@@ -14,7 +15,7 @@ const Boards: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <Spinner color="success" />;
   }
 
   if (error) {

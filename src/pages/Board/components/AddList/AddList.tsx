@@ -18,8 +18,7 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
   const [isDanger, setDanger] = useState<boolean>(false);
   const [textAlert, setTextAlert] = useState<string>('');
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  const { addList } = useActions();
-  const { fetchLists } = useActions();
+  const { addList, fetchLists } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
