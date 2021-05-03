@@ -1,6 +1,6 @@
 import React from 'react';
 // import { IList } from '../../../../../interfaces/inrefaces';
-import AddList from '../../AddList/AddList';
+import AddList from '../../../AddList/AddList';
 
 type Props = {
   url: string;

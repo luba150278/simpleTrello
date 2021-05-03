@@ -22,10 +22,11 @@
   color: #61dafb;
 }
 
-h1 {
+.h1 {
   font-size: 3rem;
   color: #00887a;
   font-weight: 500;
+  border: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {

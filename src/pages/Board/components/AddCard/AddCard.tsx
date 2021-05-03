@@ -27,7 +27,7 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
     setTimeout(() => {
       setTitle('');
       setAlert(false);
-    }, 5000);
+    }, 3000);
   }
 
   return (

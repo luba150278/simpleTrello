@@ -2,6 +2,7 @@ import { ListsAction, ListsActionTypes, ListsState } from '../types/lists';
 
 const initialState: ListsState = {
   getLists: {
+    title: '',
     users: [],
     lists: [],
   },
@@ -16,6 +17,7 @@ export const listsReducer = (state = initialState, action: ListsAction): ListsSt
         loading: true,
         error: null,
         getLists: {
+          title: '',
           users: [],
           lists: [],
         },
@@ -27,6 +29,7 @@ export const listsReducer = (state = initialState, action: ListsAction): ListsSt
         loading: false,
         error: action.payload,
         getLists: {
+          title: '',
           users: [],
           lists: [],
         },

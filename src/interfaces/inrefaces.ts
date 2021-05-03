@@ -18,6 +18,7 @@ export interface IList {
 }
 
 export interface ILists {
+  title: string;
   users: IUser[];
   lists: IList[];
 }

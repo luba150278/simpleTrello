@@ -1,83 +1,33 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
-import { IconContext } from 'react-icons';
-import { FaPlus, FaTrashAlt } from 'react-icons/fa';
-import { useActions } from '../../../../hooks/useActions';
-import { useTypeSelector } from '../../../../hooks/useTypeSelector';
-import AddCard from '../AddCard/AddCard';
-import Card from './Card/Card';
+import React from 'react';
+// import { useActions } from '../../../../hooks/useActions';
+// import { useTypeSelector } from '../../../../hooks/useTypeSelector';
+import Card from './components/Card/Card';
 import './lists.css';
-import ListMain from './ListsMain/ListMain';
+import ListMain from './components/ListsMain/ListMain';
+import ListInner from './components/ListInner/ListInner';
+import { ILists } from '../../../../interfaces/inrefaces';
 
 type Props = {
   url: string;
   boardID: string;
+  getLists: ILists;
 };
 
-const Lists: React.FC<Props> = ({ url, boardID }) => {
-  const [isCardAddVisible, setCardAddVisible] = useState(false);
-  // const [isPlusIconVisible, setPlusIconVisible] = useState(true);
-  const toggleCardAdd = (): void => {
-    setCardAddVisible((wasVisible) => !wasVisible);
-  };
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => console.log(event.target.value);
-  const { getLists, error, loading } = useTypeSelector((state) => state.lists);
-  const { fetchLists, deleteList } = useActions();
-
-  useEffect(() => {
-    fetchLists(boardID);
-  }, []);
-
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
-
-  if (error) {
-    return <h2>{error}</h2>;
-  }
+const Lists: React.FC<Props> = ({ url, boardID, getLists }) => {
   const arr = Object.keys(getLists.lists);
   const arrLenght = arr.length;
 
   const lists =
     arrLenght !== 0 ? (
-      Object.keys(getLists.lists).map((id) => {
+      arr.map((id) => {
         const list = getLists.lists[Number(id)];
         const cards = Object.keys(list.cards).map((idCard) => {
           const card = list.cards[Number(idCard)];
-          return <Card card={card} />;
+          return <Card key={card.id} card={card} />;
         });
 
-        return (
-          <div className="card list col-md-3 mx-2" key={list.id}>
-            <div className="icon__inner">
-              <IconContext.Provider value={{ className: 'trash-list' }}>
-                <FaTrashAlt
-                  onClick={(): void => {
-                    deleteList(`${url}/list/${id}`);
-                    fetchLists(boardID);
-                  }}
-                />
-              </IconContext.Provider>
-            </div>
-            <p>{list.position}</p>
-            <input
-              type="text"
-              className="listTitle"
-              placeholder={list.title}
-              value={list.title}
-              onChange={changeHandler}
-            />
-            <ul className="list-items">{cards}</ul>
-            <div className="iconPlus__inner">
-              <IconContext.Provider value={{ className: 'trash-list' }}>
-                <FaPlus onClick={toggleCardAdd} />
-              </IconContext.Provider>
-            </div>
-            {isCardAddVisible ? (
-              <AddCard url={url} position={list.position} list_id={list.id} boardID={boardID} />
-            ) : null}
-          </div>
-        );
+        return <ListInner key={id} list={list} url={url} id={id} boardID={boardID} cards={cards} />;
       })
     ) : (
       <h2>Any lists yet. Create your first list!</h2>

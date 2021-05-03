@@ -10,6 +10,12 @@ nav {
 }
 .board-header-title {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.input-row {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;

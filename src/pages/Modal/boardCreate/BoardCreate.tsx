@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { DANGER_NAME, SUCCESS_BOARD_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../common/constans/messages';
+import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../common/constans/messages';
 import { Alert } from '../../../components/Alert';
 import { isValidTitle } from '../../../functions/validTitles';
 import { useActions } from '../../../hooks/useActions';
@@ -15,14 +15,14 @@ type IProps = {
   isCreate: boolean;
   urlEdit: string;
 };
-const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
+const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate }) => {
   const [title, setTitle] = useState<string>(startTitle);
   const [isAlert, setAlert] = useState<boolean>(false);
   const [isDanger, setDanger] = useState<boolean>(false);
   const [textAlert, setTextAlert] = useState<string>('');
   const newBoard: ITitle = { title };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  const { addBoard, editBoard, fetchBoards } = useActions();
+  const { addBoard, fetchBoards } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
@@ -31,7 +31,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
     setTimeout(() => {
       setTitle('');
       setAlert(false);
-    }, 5000);
+    }, 3000);
   }
   return (
     <div className="container">
@@ -45,13 +45,9 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate, urlEdit }) => {
         className="btn btn-success mr-2 btn-new-board"
         onClick={(): void => {
           if (isValidTitle(title)) {
-            if (isCreate) {
-              addBoard(newBoard);
-            } else {
-              editBoard(newBoard, urlEdit);
-            }
+            addBoard(newBoard);
             fetchBoards();
-            setUpAlert(true, false, isCreate ? SUCCESS_BOARD_NAME : SUCCESS_BOARD_NAME_EDIT);
+            setUpAlert(true, false, SUCCESS_BOARD_NAME);
           } else {
             setUpAlert(true, true, DANGER_NAME);
           }

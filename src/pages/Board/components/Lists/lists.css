@@ -33,6 +33,7 @@
   font-weight: 700;
   text-align: center;
   width: 100%;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
 .listTitle:focus {
@@ -50,10 +51,11 @@
   padding: 0;
 }
 .card.list-item {
-  padding: 10px;
+  display: flex;
   margin-bottom: 10px;
   width: 100%;
   justify-content: center;
+  align-items: center;
   background: rgb(234, 252, 171);
 }
 
