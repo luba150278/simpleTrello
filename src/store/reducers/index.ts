@@ -8,6 +8,8 @@ import { listAddReducer } from './listAddReducer';
 import { deleteListReducer } from './deleteListReducer';
 import { cardAddReducer } from './cardAddReducer';
 import { listEditReducer } from './listEditReducer';
+import { deleteCardReducer } from './deleteCardReducer';
+import { cardEditReducer } from './cardEditReducer';
 
 export const rootReducer = combineReducers({
   boards: boardsReducer,
@@ -19,5 +21,7 @@ export const rootReducer = combineReducers({
   listDelete: deleteListReducer,
   addCard: cardAddReducer,
   editList: listEditReducer,
+  cardDelete: deleteCardReducer,
+  cardEdit: cardEditReducer,
 });
 export type RootState = ReturnType<typeof rootReducer>;

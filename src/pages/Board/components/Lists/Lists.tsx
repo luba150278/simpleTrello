@@ -24,7 +24,7 @@ const Lists: React.FC<Props> = ({ url, boardID, getLists }) => {
         const list = getLists.lists[Number(id)];
         const cards = Object.keys(list.cards).map((idCard) => {
           const card = list.cards[Number(idCard)];
-          return <Card key={card.id} card={card} />;
+          return <Card key={card.id} card={card} url={url} boardID={boardID} listID={Number(id)} />;
         });
 
         return <ListInner key={id} list={list} url={url} id={id} boardID={boardID} cards={cards} />;

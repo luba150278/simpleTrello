@@ -1,7 +1,7 @@
 import { DeleteListActions, DeleteListActionTypes, DeleteListState } from '../types/deleteList';
 
 const initialState: DeleteListState = {
-  deleted: true,
+  deleted: false,
   error: null,
 };
 

@@ -28,6 +28,11 @@
   font-weight: 500;
   border: none;
 }
+.h1:focus {
+  border: 2px solid #00887a;
+  border-radius: 2px;
+  outline: none;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

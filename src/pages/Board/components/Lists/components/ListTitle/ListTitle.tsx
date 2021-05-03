@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useRef, useState } from 'react';
-import { DANGER_NAME, SUCCESS_LIST_NAME_EDIT } from '../../../../../../common/constans/messages';
+import { DANGER_NAME } from '../../../../../../common/constans/messages';
 import { Alert } from '../../../../../../components/Alert';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
@@ -42,7 +42,6 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, url, boardID }) => {
     if (isValidTitle(title)) {
       editList(newPos, url);
       fetchLists(boardID);
-      setUpAlert(true, false, SUCCESS_LIST_NAME_EDIT);
     } else {
       setUpAlert(true, true, DANGER_NAME);
     }

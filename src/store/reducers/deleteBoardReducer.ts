@@ -1,7 +1,7 @@
 import { DeleteBoardActions, DeleteBoardActionTypes, DeleteBoardState } from '../types/deleteBoard';
 
 const initialState: DeleteBoardState = {
-  deleted: true,
+  deleted: false,
   error: null,
 };
 
