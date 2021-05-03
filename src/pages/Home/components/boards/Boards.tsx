@@ -5,13 +5,18 @@ import { Spinner } from 'reactstrap';
 import { colorGenerator } from '../../../../functions/cardColorGenerator';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypeSelector } from '../../../../hooks/useTypeSelector';
+import { store } from '../../../../store';
 import './boards.css';
 
 const Boards: React.FC = () => {
   const { getBoards, error, loading } = useTypeSelector((state) => state.boards);
   const { fetchBoards } = useActions();
   useEffect(() => {
+    const abortController = new AbortController();
     fetchBoards();
+    return (): void => {
+      abortController.abort();
+    };
   }, []);
 
   if (loading) {
@@ -21,7 +26,7 @@ const Boards: React.FC = () => {
   if (error) {
     return <h2>{error}</h2>;
   }
-
+  console.log(store.getState().boardAdd.added);
   if (getBoards.boards.length > 0) {
     return (
       <div>

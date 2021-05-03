@@ -1,7 +1,7 @@
 import { AddBoardActions, AddBoardActionTypes, AddBoardState } from '../types/addBoard';
 
 const initialState: AddBoardState = {
-  added: true,
+  added: false,
   error: null,
 };
 

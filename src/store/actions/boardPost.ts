@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 import api from '../../common/constans/api';
 import { AddBoardActions, AddBoardActionTypes } from '../types/addBoard';
+// import { fetchBoards } from './boards';
 
 type ITitle = {
   title: string;

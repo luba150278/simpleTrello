@@ -14,12 +14,10 @@ type Props = {
 
 const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
   const [title, setTitle] = useState<string>('');
-  // const [description, setDesc] = useState<string>('');
   const [isAlert, setAlert] = useState<boolean>(false);
   const [isDanger, setDanger] = useState<boolean>(false);
   const [textAlert, setTextAlert] = useState<string>('');
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  // const changeHandlerDesc = (event: React.ChangeEvent<HTMLTextAreaElement>): void => setDesc(event.target.value);
   const { addCard, fetchLists } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
@@ -39,18 +37,10 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
         <input
           className="card-title"
           type="text"
-          // id="cardTitle"
           placeholder="Enter card title"
           onChange={changeHandler}
           value={title}
         />
-        {/*         <textarea
-          className="card-desc"
-          id="cardDesc"
-          placeholder="Enter card description"
-          onChange={changeHandlerDesc}
-          value={description}
-        /> */}
         <button
           className="btn btn-primary ml-2"
           onClick={(): void => {
