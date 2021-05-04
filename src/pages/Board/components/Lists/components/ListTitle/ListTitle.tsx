@@ -38,23 +38,30 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, url, boardID }) => {
 
   const { editList, fetchLists } = useActions();
 
-  function editTile(): void {
+  function editTitle(): void {
     if (isValidTitle(title)) {
       editList(newPos, url);
-      fetchLists(boardID);
+      // fetchLists(boardID);
     } else {
       setUpAlert(true, true, DANGER_NAME);
     }
   }
   const keyPressHandler = (event: React.KeyboardEvent): void => {
     if (event.key === 'Enter') {
-      editTile();
+      editTitle();
+      fetchLists(boardID);
     }
+  };
+
+  const keyUpHandler = (): void => {
+    editTitle();
+    // setUpAlert(true, false, SUCCESS_BOARD_NAME_EDIT);
   };
 
   const blurHandler = (): void => {
     if (startTitle !== title) {
-      editTile();
+      editTitle();
+      fetchLists(boardID);
     }
   };
   return (
@@ -67,6 +74,7 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, url, boardID }) => {
         value={title}
         onChange={changeHandler}
         onKeyPress={keyPressHandler}
+        onKeyUp={keyUpHandler}
         onBlur={blurHandler}
         className="listTitle"
       />

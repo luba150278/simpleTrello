@@ -40,7 +40,7 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const { title } = getLists;
   return (
     <>
-      <BoardHeader url={url} startTitle={title} />
+      <BoardHeader url={url} startTitle={title} boardID={match.params.id} />
       <Lists url={url} boardID={match.params.id} getLists={getLists} />
       <BaseModalWrapper
         isModalVisible={isModalVisible}

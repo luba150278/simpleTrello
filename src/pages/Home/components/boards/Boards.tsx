@@ -27,6 +27,7 @@ const Boards: React.FC = () => {
     return <h2>{error}</h2>;
   }
   console.log(store.getState().boardAdd.added);
+  // console.log(getBoards);
   if (getBoards.boards.length > 0) {
     return (
       <div>
@@ -48,7 +49,6 @@ const Boards: React.FC = () => {
 
   return (
     <div>
-      <h1>Boards</h1>
       <h2>Boards wasn't create</h2>
     </div>
   );

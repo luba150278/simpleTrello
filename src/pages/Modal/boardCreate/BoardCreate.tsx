@@ -34,11 +34,18 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate }) => {
     }, 3000);
   }
   return (
-    <div className="container">
+    <div className="main-container">
       <Alert show={isAlert} text={textAlert} danger={isDanger} />
       <div className="fields mb-4">
         <div className="field mr-4">
-          <input onChange={changeHandler} value={title} type="text" id="title" placeholder="Enter board name" />
+          <input
+            onChange={changeHandler}
+            value={title}
+            type="text"
+            id="title"
+            placeholder="Enter board name"
+            className="inputName"
+          />
         </div>
       </div>
       <button

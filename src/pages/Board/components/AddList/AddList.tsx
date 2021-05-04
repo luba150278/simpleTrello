@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { DANGER_NAME, SUCCESS_LIST_NAME } from '../../../../common/constans/messages';
+import { DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
+import { setTime } from '../../../../functions/setTimeOut';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
 import './addList.css';
@@ -27,7 +28,7 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
     setTimeout(() => {
       setTitle('');
       setAlert(false);
-    }, 5000);
+    }, 3000);
   }
 
   return (
@@ -41,8 +42,8 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
             if (isValidTitle(title)) {
               const newList = { title, position: countLists + 1 };
               addList(`${url}/list`, newList);
-              setUpAlert(true, false, SUCCESS_LIST_NAME);
               fetchLists(boardID);
+              setTime();
             } else {
               setUpAlert(true, true, DANGER_NAME);
             }

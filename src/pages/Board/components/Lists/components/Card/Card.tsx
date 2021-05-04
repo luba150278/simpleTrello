@@ -37,23 +37,29 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
     }, 3000);
   }
 
-  function editTile(): void {
+  function editTitle(): void {
     if (isValidTitle(title)) {
       editCard(newData, `${url}/card/${card.id}`);
-      fetchLists(boardID);
+      // fetchLists(boardID);
     } else {
       setUpAlert(true, true, DANGER_NAME);
     }
   }
   const keyPressHandler = (event: React.KeyboardEvent): void => {
-    if (event.key === 'Enter') {
-      editTile();
+    if (event.key === 'Enter' || event.key === 'enter') {
+      editTitle();
+      fetchLists(boardID);
     }
+  };
+
+  const keyUpHandler = (): void => {
+    editTitle();
   };
 
   const blurHandler = (): void => {
     if (card.title !== title) {
-      editTile();
+      editTitle();
+      fetchLists(boardID);
     }
   };
 
@@ -69,6 +75,7 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
           value={title}
           onChange={changeHandler}
           onKeyPress={keyPressHandler}
+          onKeyUp={keyUpHandler}
           onBlur={blurHandler}
           className="listTitle"
         />

@@ -69,7 +69,7 @@
   justify-content: flex-end;
 }
 .trash-list {
-  color: #000;
+  color: rgb(128, 127, 127);
   size: 1em;
 }
 

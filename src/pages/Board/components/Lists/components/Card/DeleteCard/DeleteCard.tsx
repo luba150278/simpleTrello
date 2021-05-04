@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { IconContext } from 'react-icons';
 import { FaTrashAlt } from 'react-icons/fa';

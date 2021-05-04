@@ -13,7 +13,7 @@ type Props = {
 };
 
 const ListInner: React.FC<Props> = ({ list, url, id, boardID, cards }) => (
-  <div className="card list col-md-3 mx-2">
+  <div className="card list mx-2">
     <DeleteList url={url} id={id} boardID={boardID} />
     <p>{list.position}</p>
     <ListTitle startTitle={list.title} position={list.position} url={`${url}/list/${id}`} boardID={boardID} />

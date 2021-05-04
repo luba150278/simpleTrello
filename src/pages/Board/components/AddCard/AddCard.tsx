@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
-import { DANGER_NAME, SUCCESS_LIST_NAME } from '../../../../common/constans/messages';
+import { DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
+import { setTime } from '../../../../functions/setTimeOut';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
 import './addCard.css';
@@ -48,7 +50,7 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
               const newCard = { title, list_id, position };
               addCard(`${url}/card`, newCard);
               fetchLists(boardID);
-              setUpAlert(true, false, SUCCESS_LIST_NAME);
+              setTime();
             } else {
               setUpAlert(true, true, DANGER_NAME);
             }

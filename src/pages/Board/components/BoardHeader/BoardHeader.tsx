@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DANGER_NAME, SUCCESS_BOARD_NAME_EDIT } from '../../../../common/constans/messages';
+import { DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
@@ -9,13 +9,14 @@ import DeleteBoard from '../DeleteBoard/DeleteBoard';
 type IData = {
   url: string;
   startTitle: string;
+  boardID: string;
 };
 
 type ITitle = {
   title: string;
 };
 
-const BoardHeader: React.FC<IData> = ({ url, startTitle }) => {
+const BoardHeader: React.FC<IData> = ({ url, startTitle, boardID }) => {
   const [title, setTitle] = useState<string>(startTitle);
   const [isAlert, setAlert] = useState<boolean>(false);
   const [isDanger, setDanger] = useState<boolean>(false);
@@ -29,13 +30,12 @@ const BoardHeader: React.FC<IData> = ({ url, startTitle }) => {
       setAlert(false);
     }, 3000);
   }
-  const { editBoard } = useActions();
+  const { editBoard, fetchLists } = useActions();
   const inputEl = useRef<HTMLInputElement>(null);
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const newBoard: ITitle = { title };
-  function editTile(): void {
+  function editTitle(): void {
     if (isValidTitle(title)) {
-      setUpAlert(true, false, SUCCESS_BOARD_NAME_EDIT);
       editBoard(newBoard, url);
     } else {
       setUpAlert(true, true, DANGER_NAME);
@@ -43,13 +43,19 @@ const BoardHeader: React.FC<IData> = ({ url, startTitle }) => {
   }
   const keyPressHandler = (event: React.KeyboardEvent): void => {
     if (event.key === 'Enter') {
-      editTile();
+      editTitle();
+      fetchLists(boardID);
     }
+  };
+
+  const keyUpHandler = (): void => {
+    editTitle();
   };
 
   const blurHandler = (): void => {
     if (startTitle !== title) {
-      editTile();
+      editTitle();
+      fetchLists(boardID);
     }
   };
   return (
@@ -66,6 +72,7 @@ const BoardHeader: React.FC<IData> = ({ url, startTitle }) => {
             value={title}
             onChange={changeHandler}
             onKeyPress={keyPressHandler}
+            onKeyUp={keyUpHandler}
             onBlur={blurHandler}
           />
 

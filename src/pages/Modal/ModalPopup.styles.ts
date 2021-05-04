@@ -13,6 +13,9 @@ export const DesktopModalContainer = styled(ModalContainer)`
   padding: 40px;
   width: 450px;
   font-size: 26px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  } ;
 `;
 export const Header = styled.h3`
   color: #25306c;

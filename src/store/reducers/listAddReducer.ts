@@ -1,7 +1,7 @@
 import { AddListActions, AddListActionTypes, AddListState } from '../types/addList';
 
 const initialState: AddListState = {
-  added: true,
+  added: false,
   error: null,
 };
 
