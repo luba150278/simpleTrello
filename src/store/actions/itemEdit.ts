@@ -17,7 +17,7 @@ type List = {
   title: string;
 };
 
-export const ediItem = (newData: Card | Board | List, urlEdit: string) => async (
+export const editItem = (newData: Card | Board | List, urlEdit: string) => async (
   dispatch: Dispatch<ChangeItemActions>
 ): Promise<void> => {
   try {

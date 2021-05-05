@@ -36,11 +36,11 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, url, boardID }) => {
     }, 3000);
   }
 
-  const { editList, fetchLists } = useActions();
+  const { editItem, fetchLists } = useActions();
 
   function editTitle(): void {
     if (isValidTitle(title)) {
-      editList(newPos, url);
+      editItem(newPos, url);
       // fetchLists(boardID);
     } else {
       setUpAlert(true, true, DANGER_NAME);
