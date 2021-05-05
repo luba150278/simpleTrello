@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { DANGER_NAME } from '../../../../common/constans/messages';
+import { ADD_CARD, DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
-// import { setTime } from '../../../../functions/setTimeOut';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
 import { store } from '../../../../store';
@@ -17,25 +16,29 @@ type Props = {
 
 const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
   const [title, setTitle] = useState<string>('');
-  const [isAlert, setAlert] = useState<boolean>(false);
-  const [isDanger, setDanger] = useState<boolean>(false);
-  const [textAlert, setTextAlert] = useState<string>('');
+  const [isAlert, setAlert] = useState(false);
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchLists } = useActions();
 
-  function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
-    setAlert(alrt);
-    setDanger(dang);
-    setTextAlert(text);
+  function callAlert(): void {
+    setAlert(true);
     setTimeout(() => {
       setTitle('');
       setAlert(false);
     }, 3000);
   }
-
+  function clickHandler(): void {
+    if (isValidTitle(title)) {
+      const newCard = { title, list_id, position };
+      addItem(`${url}/card`, newCard);
+      if (typeof store.getState().changeItem.changeState === 'boolean') fetchLists(boardID);
+    } else {
+      callAlert();
+    }
+  }
   return (
     <div className="card-input-outside">
-      <Alert show={isAlert} text={textAlert} danger={isDanger} />
+      <Alert show={isAlert} text={DANGER_NAME} danger />
       <div className="card-input mt-2">
         <input
           className="card-title"
@@ -44,24 +47,8 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
           onChange={changeHandler}
           value={title}
         />
-        <button
-          className="btn btn-primary ml-2"
-          onClick={(): void => {
-            if (isValidTitle(title)) {
-              const newCard = { title, list_id, position };
-              addItem(`${url}/card`, newCard);
-              if (store.getState().changeItem.changeState) {
-                fetchLists(boardID);
-              } else {
-                console.log(`st:${store.getState().changeItem.changeState}`);
-              }
-              // setTime();
-            } else {
-              setUpAlert(true, true, DANGER_NAME);
-            }
-          }}
-        >
-          Add Card
+        <button className="btn btn-primary ml-2" onClick={clickHandler}>
+          {ADD_CARD}
         </button>
       </div>
     </div>

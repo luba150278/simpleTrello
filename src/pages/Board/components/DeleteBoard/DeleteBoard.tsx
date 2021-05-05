@@ -15,7 +15,7 @@ const DeleteBoard: React.FC<IUrl> = ({ url }) => {
       className="btn btn-danger deleteBoard ml-4"
       onClick={(): void => {
         deleteItem(url);
-        setTime();
+        setTime(3);
         history.push('/');
       }}
     >

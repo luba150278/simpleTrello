@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import api from '../../common/constans/api';
+import { ERROR_LISTS_LOAD } from '../../common/constans/messages';
 import { ListsAction, ListsActionTypes } from '../types/lists';
 
 export const fetchLists = (id: string) => async (dispatch: Dispatch<ListsAction>): Promise<void> => {
@@ -16,6 +17,6 @@ export const fetchLists = (id: string) => async (dispatch: Dispatch<ListsAction>
     });
     dispatch({ type: ListsActionTypes.FETCH_LISTS_SUCCESS, payload: response.data });
   } catch (e) {
-    dispatch({ type: ListsActionTypes.FETCH_LISTS_ERROR, payload: "Error. Boards info didn't load" });
+    dispatch({ type: ListsActionTypes.FETCH_LISTS_ERROR, payload: ERROR_LISTS_LOAD });
   }
 };

@@ -3,7 +3,7 @@ import { IBoards } from '../../interfaces/inrefaces';
 export interface BoardsState {
   getBoards: IBoards;
   loading: boolean;
-  error: null | string;
+  error: boolean | string;
 }
 export enum BoardsActionTypes {
   FETCH_BOARDS = 'FETCH_BOARDS',

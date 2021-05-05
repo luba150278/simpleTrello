@@ -1,5 +1,5 @@
 import React from 'react';
-// import { IList } from '../../../../../interfaces/inrefaces';
+import { LIST_NUMBER } from '../../../../../../common/constans/messages';
 import AddList from '../../../AddList/AddList';
 
 type Props = {
@@ -12,7 +12,9 @@ const ListMain: React.FC<Props> = ({ url, arrLenght, boardID, lists }) => (
   <div className="lists-main">
     <div className="input-row mb-4">
       <AddList url={url} countLists={arrLenght} boardID={boardID} />
-      <div className="count-lists">The lists number: {arrLenght}</div>
+      <div className="count-lists">
+        {LIST_NUMBER} {arrLenght}
+      </div>
     </div>
     <div className="cards">{lists}</div>
   </div>

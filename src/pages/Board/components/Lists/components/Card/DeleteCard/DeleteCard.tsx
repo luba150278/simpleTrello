@@ -19,7 +19,7 @@ const DeleteCard: React.FC<Props> = ({ url, id, boardID }) => {
         <FaTrashAlt
           onClick={(): void => {
             deleteItem(`${url}/card/${id}`);
-            setTime();
+            setTime(3);
             fetchLists(boardID);
           }}
         />

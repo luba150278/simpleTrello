@@ -1,4 +1,5 @@
 import React from 'react';
+import { TASKS_NUMBER } from '../../../../../../common/constans/messages';
 import { IList } from '../../../../../../interfaces/inrefaces';
 import DeleteList from '../../../DeleteList/DeleteList';
 import AddCardInput from '../AddCardInput/AddCardInput';
@@ -15,7 +16,9 @@ type Props = {
 const ListInner: React.FC<Props> = ({ list, url, id, boardID, cards }) => (
   <div className="card list mx-2">
     <DeleteList url={url} id={id} boardID={boardID} />
-    <p>The tasks number on the list: {cards.length}</p>
+    <p>
+      {TASKS_NUMBER} {cards.length}
+    </p>
     <ListTitle startTitle={list.title} position={list.position} url={`${url}/list/${id}`} boardID={boardID} />
     <ul className="list-items">{cards}</ul>
     <AddCardInput url={url} list={list} boardID={boardID} />

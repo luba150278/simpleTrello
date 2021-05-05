@@ -1,4 +1,5 @@
 import React from 'react';
+import { ADD_BOARD_TITLE } from '../../common/constans/messages';
 import BoardCreate from '../Home/components/boards/boardCreate/BoardCreate';
 import Modal from './Modal';
 import { Close, DesktopModalContainer, Header } from './ModalPopup.styles';
@@ -17,7 +18,7 @@ const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({ isModalVisible, onB
     <Modal onBackDropClick={onBackDropClick}>
       <DesktopModalContainer>
         <Close onClick={(): void => onBackDropClick()}>x</Close>
-        <Header>Add new board</Header>
+        <Header>{ADD_BOARD_TITLE}</Header>
         <BoardCreate startTitle={startTitle} />
       </DesktopModalContainer>
     </Modal>

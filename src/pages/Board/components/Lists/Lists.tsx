@@ -7,6 +7,7 @@ import './lists.css';
 import ListMain from './components/ListsMain/ListMain';
 import ListInner from './components/ListInner/ListInner';
 import { ILists } from '../../../../interfaces/inrefaces';
+import { ANY_LIST_YET } from '../../../../common/constans/messages';
 
 type Props = {
   url: string;
@@ -30,7 +31,7 @@ const Lists: React.FC<Props> = ({ url, boardID, getLists }) => {
         return <ListInner key={id} list={list} url={url} id={id} boardID={boardID} cards={cards} />;
       })
     ) : (
-      <h2>Any lists yet. Create your first list!</h2>
+      <h2>{ANY_LIST_YET}</h2>
     );
 
   return <ListMain url={url} arrLenght={arrLenght} boardID={boardID} lists={lists} />;

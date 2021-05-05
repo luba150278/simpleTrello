@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { ERROR_ITEM_EDIT } from '../../common/constans/messages';
 import { ChangeItemActions, ChangeItemActionTypes } from '../types/changeItem';
 
 type Card = {
@@ -22,7 +23,7 @@ export const editItem = (newData: Card | Board | List, urlEdit: string) => async
 ): Promise<void> => {
   try {
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM, payload: false });
-    axios.put(urlEdit, newData, {
+    await axios.put(urlEdit, newData, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer 123',
@@ -30,6 +31,6 @@ export const editItem = (newData: Card | Board | List, urlEdit: string) => async
     });
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_SUCCESS, payload: true });
   } catch (e) {
-    dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_ERROR, payload: "Error. Lists title didn't change" });
+    dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_ERROR, payload: ERROR_ITEM_EDIT });
   }
 };

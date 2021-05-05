@@ -1,3 +1,3 @@
-export function setTime(): void {
-  setTimeout(() => {}, 3);
+export function setTime(time: number): void {
+  setTimeout(() => {}, time);
 }

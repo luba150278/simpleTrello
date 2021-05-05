@@ -19,8 +19,9 @@ const DeleteList: React.FC<Props> = ({ url, id, boardID }) => {
         <FaTrashAlt
           onClick={(): void => {
             deleteItem(`${url}/list/${id}`);
-            fetchLists(boardID);
-            console.log(store.getState().lists.loading);
+            if (store.getState().changeItem.changeState) {
+              fetchLists(boardID);
+            }
           }}
         />
       </IconContext.Provider>

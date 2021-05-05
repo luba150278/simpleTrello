@@ -5,6 +5,7 @@ import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../../../common/constans/
 import { Alert } from '../../../../../components/Alert';
 import { isValidTitle } from '../../../../../functions/validTitles';
 import { useActions } from '../../../../../hooks/useActions';
+import { store } from '../../../../../store';
 // import { store } from '../../../../../store';
 import './boardCreate.css';
 
@@ -54,9 +55,8 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
         onClick={(): void => {
           if (isValidTitle(title)) {
             addItem(url, newBoard);
-            // console.log(store.getState().changeItem.changeState);
             setUpAlert(true, false, SUCCESS_BOARD_NAME);
-            fetchBoards();
+            if (typeof store.getState().boards.error === 'boolean') fetchBoards();
           } else {
             setUpAlert(true, true, DANGER_NAME);
           }
