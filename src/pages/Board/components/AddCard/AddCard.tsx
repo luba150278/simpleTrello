@@ -53,7 +53,7 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
               if (store.getState().changeItem.changeState) {
                 fetchLists(boardID);
               } else {
-                console.log(store.getState().changeItem.changeState);
+                console.log(`st:${store.getState().changeItem.changeState}`);
               }
               // setTime();
             } else {

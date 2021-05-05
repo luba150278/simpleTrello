@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import Spinner from 'reactstrap/es/Spinner';
 import api from '../../common/constans/api';
 import { useActions } from '../../hooks/useActions';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
@@ -30,7 +31,7 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   }, []);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <Spinner color="success" />;
   }
 
   if (error) {
