@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
-import { setTime } from '../../../../functions/setTimeOut';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
+// import { store } from '../../../../store';
 import './addList.css';
 
 type Props = {
@@ -42,8 +42,9 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
             if (isValidTitle(title)) {
               const newList = { title, position: countLists + 1 };
               addList(`${url}/list`, newList);
+              // console.log(store.getState().listAdd.added);
               fetchLists(boardID);
-              setTime();
+              // setTime();
             } else {
               setUpAlert(true, true, DANGER_NAME);
             }

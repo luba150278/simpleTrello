@@ -1,5 +1,5 @@
 export enum AddCardActionTypes {
-  /* ADD_Card = 'ADD_Card', */
+  ADD_CARD = 'ADD_CARD',
   ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS',
   ADD_CARD_ERROR = 'ADD_Card_ERROR',
 }
@@ -7,6 +7,11 @@ export enum AddCardActionTypes {
 export interface AddCardState {
   added: boolean;
   error: null | string;
+}
+
+interface AddCardAction {
+  type: AddCardActionTypes.ADD_CARD;
+  payload: boolean;
 }
 interface AddCardSuccessAction {
   type: AddCardActionTypes.ADD_CARD_SUCCESS;
@@ -16,4 +21,4 @@ interface AddCardErrorAction {
   type: AddCardActionTypes.ADD_CARD_ERROR;
   payload: string;
 }
-export type AddCardActions = AddCardSuccessAction | AddCardErrorAction;
+export type AddCardActions = AddCardAction | AddCardSuccessAction | AddCardErrorAction;

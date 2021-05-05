@@ -8,7 +8,7 @@ type ITitle = {
 
 export const addList = (url: string, newList: ITitle) => async (dispatch: Dispatch<AddListActions>): Promise<void> => {
   try {
-    /* dispatch({ type: AddListActionTypes.ADD_List, payload: false }); */
+    dispatch({ type: AddListActionTypes.ADD_LIST, payload: false });
     axios.post(url, newList, {
       headers: {
         'Content-Type': 'application/json',

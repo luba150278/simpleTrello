@@ -1,5 +1,5 @@
 export enum DeleteBoardActionTypes {
-  /* ADD_BOARD = 'ADD_BOARD', */
+  DELETE_BOARD = 'DELETE_BOARD',
   DELETE_BOARD_SUCCESS = 'DELETE_BOARD_SUCCESS',
   DELETE_BOARD_ERROR = 'DELETE_BOARD_ERROR',
 }
@@ -7,6 +7,10 @@ export enum DeleteBoardActionTypes {
 export interface DeleteBoardState {
   deleted: boolean;
   error: null | string;
+}
+interface DeleteBoardAction {
+  type: DeleteBoardActionTypes.DELETE_BOARD;
+  payload: boolean;
 }
 interface DeleteBoardSuccessAction {
   type: DeleteBoardActionTypes.DELETE_BOARD_SUCCESS;
@@ -16,4 +20,4 @@ interface DeleteBoardErrorAction {
   type: DeleteBoardActionTypes.DELETE_BOARD_ERROR;
   payload: string;
 }
-export type DeleteBoardActions = DeleteBoardSuccessAction | DeleteBoardErrorAction;
+export type DeleteBoardActions = DeleteBoardAction | DeleteBoardSuccessAction | DeleteBoardErrorAction;

@@ -1,11 +1,17 @@
 export enum DeleteListActionTypes {
-  DELETE_LIST_SUCCESS = 'DELETE_List_SUCCESS',
-  DELETE_LIST_ERROR = 'DELETE_List_ERROR',
+  DELETE_LIST = 'DELETE_LIST',
+  DELETE_LIST_SUCCESS = 'DELETE_LIST_SUCCESS',
+  DELETE_LIST_ERROR = 'DELETE_LIST_ERROR',
 }
 
 export interface DeleteListState {
   deleted: boolean;
   error: null | string;
+}
+
+interface DeleteListAction {
+  type: DeleteListActionTypes.DELETE_LIST;
+  payload: boolean;
 }
 interface DeleteListSuccessAction {
   type: DeleteListActionTypes.DELETE_LIST_SUCCESS;
@@ -15,4 +21,4 @@ interface DeleteListErrorAction {
   type: DeleteListActionTypes.DELETE_LIST_ERROR;
   payload: string;
 }
-export type DeleteListActions = DeleteListSuccessAction | DeleteListErrorAction;
+export type DeleteListActions = DeleteListAction | DeleteListSuccessAction | DeleteListErrorAction;

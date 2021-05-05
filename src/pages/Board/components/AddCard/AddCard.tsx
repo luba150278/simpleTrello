@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import { DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
-import { setTime } from '../../../../functions/setTimeOut';
+// import { setTime } from '../../../../functions/setTimeOut';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
+import { store } from '../../../../store';
 import './addCard.css';
 
 type Props = {
@@ -49,8 +50,12 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
             if (isValidTitle(title)) {
               const newCard = { title, list_id, position };
               addCard(`${url}/card`, newCard);
-              fetchLists(boardID);
-              setTime();
+              if (store.getState().addCard.added) {
+                fetchLists(boardID);
+              } else {
+                console.log(store.getState().addCard.added);
+              }
+              // setTime();
             } else {
               setUpAlert(true, true, DANGER_NAME);
             }

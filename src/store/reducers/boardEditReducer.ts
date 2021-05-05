@@ -1,7 +1,7 @@
 import { EditBoardActions, EditBoardActionTypes, EditBoardState } from '../types/editBoard';
 
 const initialState: EditBoardState = {
-  edited: true,
+  edited: false,
   error: null,
 };
 

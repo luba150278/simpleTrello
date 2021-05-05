@@ -1,7 +1,7 @@
 import { AddCardActions, AddCardActionTypes, AddCardState } from '../types/addCard';
 
 const initialState: AddCardState = {
-  added: true,
+  added: false,
   error: null,
 };
 

@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { IconContext } from 'react-icons';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useActions } from '../../../../hooks/useActions';
+import { store } from '../../../../store';
 
 type Props = {
   url: string;
@@ -18,6 +20,7 @@ const DeleteList: React.FC<Props> = ({ url, id, boardID }) => {
           onClick={(): void => {
             deleteList(`${url}/list/${id}`);
             fetchLists(boardID);
+            console.log(store.getState().lists.loading);
           }}
         />
       </IconContext.Provider>

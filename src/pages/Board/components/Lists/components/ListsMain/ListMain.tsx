@@ -12,7 +12,7 @@ const ListMain: React.FC<Props> = ({ url, arrLenght, boardID, lists }) => (
   <div className="lists-main">
     <div className="input-row mb-4">
       <AddList url={url} countLists={arrLenght} boardID={boardID} />
-      <div className="count-lists">Всего списков: {arrLenght}</div>
+      <div className="count-lists">The lists number: {arrLenght}</div>
     </div>
     <div className="cards">{lists}</div>
   </div>

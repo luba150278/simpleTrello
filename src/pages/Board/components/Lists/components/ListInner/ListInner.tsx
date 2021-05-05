@@ -15,7 +15,7 @@ type Props = {
 const ListInner: React.FC<Props> = ({ list, url, id, boardID, cards }) => (
   <div className="card list mx-2">
     <DeleteList url={url} id={id} boardID={boardID} />
-    <p>{list.position}</p>
+    <p>The tasks number on the list: {cards.length}</p>
     <ListTitle startTitle={list.title} position={list.position} url={`${url}/list/${id}`} boardID={boardID} />
     <ul className="list-items">{cards}</ul>
     <AddCardInput url={url} list={list} boardID={boardID} />

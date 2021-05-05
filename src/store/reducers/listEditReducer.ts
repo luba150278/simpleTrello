@@ -1,7 +1,7 @@
 import { EditListActions, EditListActionTypes, EditListState } from '../types/editList';
 
 const initialState: EditListState = {
-  edited: true,
+  edited: false,
   error: null,
 };
 

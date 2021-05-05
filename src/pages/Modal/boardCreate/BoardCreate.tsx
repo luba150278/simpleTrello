@@ -4,6 +4,7 @@ import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../common/constans/messag
 import { Alert } from '../../../components/Alert';
 import { isValidTitle } from '../../../functions/validTitles';
 import { useActions } from '../../../hooks/useActions';
+import { store } from '../../../store';
 import './boardCreate.css';
 
 type ITitle = {
@@ -53,6 +54,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate }) => {
         onClick={(): void => {
           if (isValidTitle(title)) {
             addBoard(newBoard);
+            console.log(store.getState().boardAdd.added);
             fetchBoards();
             setUpAlert(true, false, SUCCESS_BOARD_NAME);
           } else {

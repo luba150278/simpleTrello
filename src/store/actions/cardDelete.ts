@@ -4,7 +4,7 @@ import { DeleteCardActions, DeleteCardActionTypes } from '../types/deleteCard';
 
 export const deleteCard = (url: string) => async (dispatch: Dispatch<DeleteCardActions>): Promise<void> => {
   try {
-    /* dispatch({ type: DeleteCardActionTypes.Delete_Card, payload: false }); */
+    dispatch({ type: DeleteCardActionTypes.DELETE_CARD, payload: false });
     axios.delete(url, {
       headers: {
         'Content-Type': 'application/json',

@@ -11,7 +11,7 @@ export const editList = (newData: Data, urlEdit: string) => async (
   dispatch: Dispatch<EditListActions>
 ): Promise<void> => {
   try {
-    /* dispatch({ type: AddListActionTypes.ADD_List, payload: false }); */
+    dispatch({ type: EditListActionTypes.EDIT_LIST, payload: false });
     axios.put(urlEdit, newData, {
       headers: {
         'Content-Type': 'application/json',

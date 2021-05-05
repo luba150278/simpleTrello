@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import React, { useRef, useState } from 'react';
 import { DANGER_NAME } from '../../../../../../common/constans/messages';
 import { Alert } from '../../../../../../components/Alert';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
 import { ICard } from '../../../../../../interfaces/inrefaces';
+import { store } from '../../../../../../store';
 import DeleteCard from './DeleteCard/DeleteCard';
 
 type Props = {
@@ -40,7 +42,9 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
   function editTitle(): void {
     if (isValidTitle(title)) {
       editCard(newData, `${url}/card/${card.id}`);
-      // fetchLists(boardID);
+      if (store.getState().cardEdit.edited) {
+        fetchLists(boardID);
+      }
     } else {
       setUpAlert(true, true, DANGER_NAME);
     }
@@ -48,7 +52,6 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
   const keyPressHandler = (event: React.KeyboardEvent): void => {
     if (event.key === 'Enter' || event.key === 'enter') {
       editTitle();
-      fetchLists(boardID);
     }
   };
 
@@ -59,12 +62,11 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
   const blurHandler = (): void => {
     if (card.title !== title) {
       editTitle();
-      fetchLists(boardID);
     }
   };
 
   return (
-    <li className="card list-item">
+    <li className="card list-item" draggable>
       <DeleteCard url={url} id={card.id} boardID={boardID} />
       <Alert show={isAlert} text={textAlert} danger={isDanger} />
       <div className="card__inner">

@@ -8,7 +8,7 @@ type ITitle = {
 
 export const addCard = (url: string, newCard: ITitle) => async (dispatch: Dispatch<AddCardActions>): Promise<void> => {
   try {
-    /* dispatch({ type: AddCardActionTypes.ADD_Card, payload: false }); */
+    dispatch({ type: AddCardActionTypes.ADD_CARD, payload: false });
     axios.post(url, newCard, {
       headers: {
         'Content-Type': 'application/json',
@@ -17,6 +17,6 @@ export const addCard = (url: string, newCard: ITitle) => async (dispatch: Dispat
     });
     dispatch({ type: AddCardActionTypes.ADD_CARD_SUCCESS, payload: true });
   } catch (e) {
-    dispatch({ type: AddCardActionTypes.ADD_CARD_ERROR, payload: "Error. Cards info don't load" });
+    dispatch({ type: AddCardActionTypes.ADD_CARD_ERROR, payload: "Error. Card did't add" });
   }
 };

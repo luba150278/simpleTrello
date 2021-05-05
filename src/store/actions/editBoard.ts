@@ -10,7 +10,8 @@ export const editBoard = (newBoard: ITitle, urlEdit: string) => async (
   dispatch: Dispatch<EditBoardActions>
 ): Promise<void> => {
   try {
-    /* dispatch({ type: AddBoardActionTypes.ADD_BOARD, payload: false }); */
+    dispatch({ type: EditBoardActionTypes.EDIT_BOARD, payload: false });
+
     axios.put(urlEdit, newBoard, {
       headers: {
         'Content-Type': 'application/json',

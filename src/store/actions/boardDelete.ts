@@ -4,7 +4,7 @@ import { DeleteBoardActions, DeleteBoardActionTypes } from '../types/deleteBoard
 
 export const deleteBoard = (url: string) => async (dispatch: Dispatch<DeleteBoardActions>): Promise<void> => {
   try {
-    /* dispatch({ type: DeleteBoardActionTypes.Delete_BOARD, payload: false }); */
+    dispatch({ type: DeleteBoardActionTypes.DELETE_BOARD, payload: false });
     axios.delete(url, {
       headers: {
         'Content-Type': 'application/json',

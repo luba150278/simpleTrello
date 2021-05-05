@@ -1,5 +1,5 @@
 export enum EditBoardActionTypes {
-  /* ADD_BOARD = 'ADD_BOARD', */
+  EDIT_BOARD = 'EDIT_BOARD',
   EDIT_BOARD_SUCCESS = 'EDIT_BOARD_SUCCESS',
   EDIT_BOARD_ERROR = 'EDIT_BOARD_ERROR',
 }
@@ -7,6 +7,11 @@ export enum EditBoardActionTypes {
 export interface EditBoardState {
   edited: boolean;
   error: null | string;
+}
+
+interface EditBoardAction {
+  type: EditBoardActionTypes.EDIT_BOARD;
+  payload: boolean;
 }
 interface EditBoardSuccessAction {
   type: EditBoardActionTypes.EDIT_BOARD_SUCCESS;
@@ -16,4 +21,4 @@ interface EditBoardErrorAction {
   type: EditBoardActionTypes.EDIT_BOARD_ERROR;
   payload: string;
 }
-export type EditBoardActions = EditBoardSuccessAction | EditBoardErrorAction;
+export type EditBoardActions = EditBoardAction | EditBoardSuccessAction | EditBoardErrorAction;

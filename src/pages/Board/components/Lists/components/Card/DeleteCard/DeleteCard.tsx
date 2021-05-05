@@ -2,6 +2,7 @@
 import React from 'react';
 import { IconContext } from 'react-icons';
 import { FaTrashAlt } from 'react-icons/fa';
+import { setTime } from '../../../../../../../functions/setTimeOut';
 import { useActions } from '../../../../../../../hooks/useActions';
 
 type Props = {
@@ -18,6 +19,7 @@ const DeleteCard: React.FC<Props> = ({ url, id, boardID }) => {
         <FaTrashAlt
           onClick={(): void => {
             deleteCard(`${url}/card/${id}`);
+            setTime();
             fetchLists(boardID);
           }}
         />

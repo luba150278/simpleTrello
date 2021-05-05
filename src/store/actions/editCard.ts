@@ -11,7 +11,7 @@ export const editCard = (newData: Data, urlEdit: string) => async (
   dispatch: Dispatch<EditCardActions>
 ): Promise<void> => {
   try {
-    /* dispatch({ type: AddCardActionTypes.ADD_Card, payload: false }); */
+    dispatch({ type: EditCardActionTypes.EDIT_CARD, payload: false });
     axios.put(urlEdit, newData, {
       headers: {
         'Content-Type': 'application/json',

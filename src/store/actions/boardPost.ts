@@ -10,7 +10,7 @@ type ITitle = {
 const url = `${api.baseURL}/board`;
 export const addBoard = (newBoard: ITitle) => async (dispatch: Dispatch<AddBoardActions>): Promise<void> => {
   try {
-    /* dispatch({ type: AddBoardActionTypes.ADD_BOARD, payload: false }); */
+    dispatch({ type: AddBoardActionTypes.ADD_BOARD, payload: false });
     axios.post(url, newBoard, {
       headers: {
         'Content-Type': 'application/json',

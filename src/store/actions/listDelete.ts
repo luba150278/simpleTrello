@@ -4,7 +4,7 @@ import { DeleteListActions, DeleteListActionTypes } from '../types/deleteList';
 
 export const deleteList = (url: string) => async (dispatch: Dispatch<DeleteListActions>): Promise<void> => {
   try {
-    /* dispatch({ type: DeleteListActionTypes.Delete_List, payload: false }); */
+    dispatch({ type: DeleteListActionTypes.DELETE_LIST, payload: false });
     axios.delete(url, {
       headers: {
         'Content-Type': 'application/json',
