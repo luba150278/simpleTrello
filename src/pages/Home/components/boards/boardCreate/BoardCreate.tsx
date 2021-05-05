@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { api } from '../../../common/constans';
-import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../common/constans/messages';
-import { Alert } from '../../../components/Alert';
-import { isValidTitle } from '../../../functions/validTitles';
-import { useActions } from '../../../hooks/useActions';
-import { store } from '../../../store';
+import { api } from '../../../../../common/constans';
+import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../../../common/constans/messages';
+import { Alert } from '../../../../../components/Alert';
+import { isValidTitle } from '../../../../../functions/validTitles';
+import { useActions } from '../../../../../hooks/useActions';
+// import { store } from '../../../../../store';
 import './boardCreate.css';
 
 type ITitle = {
@@ -56,9 +56,9 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate }) => {
         onClick={(): void => {
           if (isValidTitle(title)) {
             addItem(url, newBoard);
-            console.log(store.getState().changeItem.changeState);
-            fetchBoards();
+            // console.log(store.getState().changeItem.changeState);
             setUpAlert(true, false, SUCCESS_BOARD_NAME);
+            fetchBoards();
           } else {
             setUpAlert(true, true, DANGER_NAME);
           }

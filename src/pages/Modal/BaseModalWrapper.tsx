@@ -1,5 +1,5 @@
 import React from 'react';
-import BoardCreate from './boardCreate/BoardCreate';
+import BoardCreate from '../Home/components/boards/boardCreate/BoardCreate';
 import Modal from './Modal';
 import { Close, DesktopModalContainer, Header } from './ModalPopup.styles';
 
