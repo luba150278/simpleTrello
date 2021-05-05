@@ -30,13 +30,13 @@ const BoardHeader: React.FC<IData> = ({ url, startTitle, boardID }) => {
       setAlert(false);
     }, 3000);
   }
-  const { editBoard, fetchLists } = useActions();
+  const { ediItem, fetchLists } = useActions();
   const inputEl = useRef<HTMLInputElement>(null);
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  const newBoard: ITitle = { title };
+  const newData: ITitle = { title };
   function editTitle(): void {
     if (isValidTitle(title)) {
-      editBoard(newBoard, url);
+      ediItem(newData, url);
     } else {
       setUpAlert(true, true, DANGER_NAME);
     }

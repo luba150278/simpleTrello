@@ -21,7 +21,7 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
   const [isDanger, setDanger] = useState<boolean>(false);
   const [textAlert, setTextAlert] = useState<string>('');
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  const { addCard, fetchLists } = useActions();
+  const { addItem, fetchLists } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
@@ -49,11 +49,11 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
           onClick={(): void => {
             if (isValidTitle(title)) {
               const newCard = { title, list_id, position };
-              addCard(`${url}/card`, newCard);
-              if (store.getState().addCard.added) {
+              addItem(`${url}/card`, newCard);
+              if (store.getState().changeItem.changeState) {
                 fetchLists(boardID);
               } else {
-                console.log(store.getState().addCard.added);
+                console.log(store.getState().changeItem.changeState);
               }
               // setTime();
             } else {

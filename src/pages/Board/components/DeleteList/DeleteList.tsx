@@ -12,13 +12,13 @@ type Props = {
 };
 
 const DeleteList: React.FC<Props> = ({ url, id, boardID }) => {
-  const { fetchLists, deleteList } = useActions();
+  const { fetchLists, deleteItem } = useActions();
   return (
     <div className="icon__inner">
       <IconContext.Provider value={{ className: 'trash-list' }}>
         <FaTrashAlt
           onClick={(): void => {
-            deleteList(`${url}/list/${id}`);
+            deleteItem(`${url}/list/${id}`);
             fetchLists(boardID);
             console.log(store.getState().lists.loading);
           }}

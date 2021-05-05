@@ -9,12 +9,12 @@ type IUrl = {
 
 const DeleteBoard: React.FC<IUrl> = ({ url }) => {
   const history = useHistory();
-  const { deleteBoard } = useActions();
+  const { deleteItem } = useActions();
   return (
     <button
       className="btn btn-danger deleteBoard ml-4"
       onClick={(): void => {
-        deleteBoard(url);
+        deleteItem(url);
         setTime();
         history.push('/');
       }}

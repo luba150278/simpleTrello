@@ -19,7 +19,7 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
   const [isDanger, setDanger] = useState<boolean>(false);
   const [textAlert, setTextAlert] = useState<string>('');
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
-  const { addList, fetchLists } = useActions();
+  const { addItem, fetchLists } = useActions();
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
@@ -41,7 +41,7 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
           onClick={(): void => {
             if (isValidTitle(title)) {
               const newList = { title, position: countLists + 1 };
-              addList(`${url}/list`, newList);
+              addItem(`${url}/list`, newList);
               // console.log(store.getState().listAdd.added);
               fetchLists(boardID);
               // setTime();
