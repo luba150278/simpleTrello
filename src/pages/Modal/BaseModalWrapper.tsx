@@ -7,17 +7,9 @@ interface BaseModalWrapperProps {
   isModalVisible: boolean;
   onBackDropClick: () => void;
   startTitle: string;
-  isCreate: boolean;
-  urlEdit: string;
 }
 
-const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({
-  isModalVisible,
-  onBackDropClick,
-  startTitle,
-  isCreate,
-  urlEdit,
-}) => {
+const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({ isModalVisible, onBackDropClick, startTitle }) => {
   if (!isModalVisible) {
     return null;
   }
@@ -25,8 +17,8 @@ const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({
     <Modal onBackDropClick={onBackDropClick}>
       <DesktopModalContainer>
         <Close onClick={(): void => onBackDropClick()}>x</Close>
-        <Header>{isCreate ? 'Add new board' : 'Edit board title'}</Header>
-        <BoardCreate startTitle={startTitle} isCreate={isCreate} urlEdit={urlEdit} />
+        <Header>Add new board</Header>
+        <BoardCreate startTitle={startTitle} />
       </DesktopModalContainer>
     </Modal>
   );

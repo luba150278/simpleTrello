@@ -43,13 +43,7 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
     <>
       <BoardHeader url={url} startTitle={title} boardID={match.params.id} />
       <Lists url={url} boardID={match.params.id} getLists={getLists} />
-      <BaseModalWrapper
-        isModalVisible={isModalVisible}
-        onBackDropClick={toggleModal}
-        startTitle=""
-        isCreate={false}
-        urlEdit={url}
-      />
+      <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
     </>
   );
 };

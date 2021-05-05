@@ -14,10 +14,8 @@ type ITitle = {
 
 type IProps = {
   startTitle: string;
-  isCreate: boolean;
-  urlEdit: string;
 };
-const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate }) => {
+const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
   const [title, setTitle] = useState<string>(startTitle);
   const [isAlert, setAlert] = useState<boolean>(false);
   const [isDanger, setDanger] = useState<boolean>(false);
@@ -64,7 +62,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle, isCreate }) => {
           }
         }}
       >
-        {isCreate ? 'Add board' : 'Edit board'}
+        Add board
       </button>
     </div>
   );
