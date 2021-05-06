@@ -4,7 +4,6 @@ import { ADD_LIST, DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
-import { store } from '../../../../store';
 import './addList.css';
 
 type Props = {
@@ -30,7 +29,7 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
     if (isValidTitle(title)) {
       const newList = { title, position: countLists + 1 };
       addItem(`${url}/list`, newList);
-      if (typeof store.getState().changeItem.changeState === 'boolean') fetchLists(boardID);
+      fetchLists(boardID);
     } else {
       callAlert();
     }

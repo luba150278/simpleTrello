@@ -4,7 +4,6 @@ import { ADD_CARD, DANGER_NAME } from '../../../../common/constans/messages';
 import { Alert } from '../../../../components/Alert';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
-import { store } from '../../../../store';
 import './addCard.css';
 
 type Props = {
@@ -31,7 +30,7 @@ const AddCard: React.FC<Props> = ({ url, position, list_id, boardID }) => {
     if (isValidTitle(title)) {
       const newCard = { title, list_id, position };
       addItem(`${url}/card`, newCard);
-      if (typeof store.getState().changeItem.changeState === 'boolean') fetchLists(boardID);
+      fetchLists(boardID);
     } else {
       callAlert();
     }

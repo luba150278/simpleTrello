@@ -4,7 +4,6 @@ import { DANGER_NAME } from '../../../../../../common/constans/messages';
 import { Alert } from '../../../../../../components/Alert';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
-import { store } from '../../../../../../store';
 
 type Props = {
   startTitle: string;
@@ -38,7 +37,7 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, url, boardID }) => {
     if (isValidTitle(title)) {
       editItem(newPos, url);
       if (update) {
-        if (typeof store.getState().changeItem.changeState === 'boolean' && !isAlert) fetchLists(boardID);
+        fetchLists(boardID);
       }
     } else {
       callAlert();

@@ -1,5 +1,4 @@
 import { useActions } from '../hooks/useActions';
-import { store } from '../store';
 import { isValidTitle } from './validTitles';
 
 type Data = {
@@ -28,7 +27,7 @@ export function editTitle({ update, newData, url, boardID }: Props): boolean {
   if (isValidTitle(newData.title)) {
     editItem(newData, url);
     if (update) {
-      if (typeof store.getState().changeItem.changeState === 'boolean') fetchLists(boardID);
+      fetchLists(boardID);
     }
     return true;
   }

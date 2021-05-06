@@ -3,7 +3,6 @@ import React from 'react';
 import { IconContext } from 'react-icons';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useActions } from '../../../../hooks/useActions';
-import { store } from '../../../../store';
 
 type Props = {
   url: string;
@@ -19,9 +18,7 @@ const DeleteList: React.FC<Props> = ({ url, id, boardID }) => {
         <FaTrashAlt
           onClick={(): void => {
             deleteItem(`${url}/list/${id}`);
-            if (store.getState().changeItem.changeState) {
-              fetchLists(boardID);
-            }
+            fetchLists(boardID);
           }}
         />
       </IconContext.Provider>

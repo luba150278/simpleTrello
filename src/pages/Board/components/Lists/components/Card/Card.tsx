@@ -6,7 +6,6 @@ import { Alert } from '../../../../../../components/Alert';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
 import { ICard } from '../../../../../../interfaces/inrefaces';
-import { store } from '../../../../../../store';
 import DeleteCard from './DeleteCard/DeleteCard';
 
 type Props = {
@@ -40,7 +39,7 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
     if (isValidTitle(title)) {
       editItem(newData, `${url}/card/${card.id}`);
       if (update) {
-        if (typeof store.getState().changeItem.changeState === 'boolean' && !isAlert) fetchLists(boardID);
+        fetchLists(boardID);
       }
     } else {
       callAlert();
