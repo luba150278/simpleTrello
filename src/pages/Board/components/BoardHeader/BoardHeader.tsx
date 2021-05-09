@@ -7,7 +7,6 @@ import { useActions } from '../../../../hooks/useActions';
 import DeleteBoard from '../DeleteBoard/DeleteBoard';
 
 type IData = {
-  url: string;
   startTitle: string;
   boardID: string;
 };
@@ -16,7 +15,7 @@ type ITitle = {
   title: string;
 };
 
-const BoardHeader: React.FC<IData> = ({ url, startTitle, boardID }) => {
+const BoardHeader: React.FC<IData> = ({ startTitle, boardID }) => {
   const [title, setTitle] = useState<string>(startTitle);
   const [isAlert, setAlert] = useState<boolean>(false);
   const [isDanger, setDanger] = useState<boolean>(false);
@@ -36,7 +35,7 @@ const BoardHeader: React.FC<IData> = ({ url, startTitle, boardID }) => {
   const newData: ITitle = { title };
   function editTitle(): void {
     if (isValidTitle(title)) {
-      editItem(newData, url);
+      editItem(newData, boardID);
     } else {
       setUpAlert(true, true, DANGER_NAME);
     }
@@ -76,7 +75,7 @@ const BoardHeader: React.FC<IData> = ({ url, startTitle, boardID }) => {
             onBlur={blurHandler}
           />
 
-          <DeleteBoard url={url} />
+          <DeleteBoard />
         </div>
       </div>
     </div>

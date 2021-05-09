@@ -10,7 +10,6 @@ import DeleteCard from './DeleteCard/DeleteCard';
 
 type Props = {
   card: ICard;
-  url: string;
   boardID: string;
   listID: number;
 };
@@ -19,7 +18,7 @@ type Data = {
   list_id: number;
 };
 
-const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
+const Card: React.FC<Props> = ({ card, boardID, listID }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
@@ -37,7 +36,7 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
 
   function editTitle(update: boolean): void {
     if (isValidTitle(title)) {
-      editItem(newData, `${url}/card/${card.id}`);
+      editItem(newData, `${boardID}/card/${card.id}`);
       if (update) {
         fetchLists(boardID);
       }
@@ -63,7 +62,7 @@ const Card: React.FC<Props> = ({ card, url, boardID, listID }) => {
 
   return (
     <li className="card list-item" draggable>
-      <DeleteCard url={url} id={card.id} boardID={boardID} />
+      <DeleteCard id={card.id} boardID={boardID} />
       <Alert show={isAlert} text={DANGER_NAME} danger />
       <div className="card__inner">
         <input

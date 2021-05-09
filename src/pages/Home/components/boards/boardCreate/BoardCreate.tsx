@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { api } from '../../../../../common/constans';
+// import { api } from '../../../../../common/constans';
 import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../../../common/constans/messages';
 import { Alert } from '../../../../../components/Alert';
 import { isValidTitle } from '../../../../../functions/validTitles';
@@ -22,7 +22,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
   const newBoard: ITitle = { title };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchBoards } = useActions();
-  const url = `${api.baseURL}/board`;
+  // const url = `${api.baseURL}/board`;
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
@@ -52,7 +52,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
         className="btn btn-success mr-2 btn-new-board"
         onClick={(): void => {
           if (isValidTitle(title)) {
-            addItem(url, newBoard);
+            addItem('', newBoard);
             setUpAlert(true, false, SUCCESS_BOARD_NAME);
             fetchBoards();
           } else {

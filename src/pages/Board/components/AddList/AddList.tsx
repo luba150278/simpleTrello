@@ -7,12 +7,11 @@ import { useActions } from '../../../../hooks/useActions';
 import './addList.css';
 
 type Props = {
-  url: string;
   countLists: number;
   boardID: string;
 };
 
-const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
+const AddList: React.FC<Props> = ({ countLists, boardID }) => {
   const [title, setTitle] = useState<string>('');
   const [isAlert, setAlert] = useState<boolean>(false);
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
@@ -28,7 +27,7 @@ const AddList: React.FC<Props> = ({ url, countLists, boardID }) => {
   function clickHandler(): void {
     if (isValidTitle(title)) {
       const newList = { title, position: countLists + 1 };
-      addItem(`${url}/list`, newList);
+      addItem(`${boardID}/list`, newList);
       fetchLists(boardID);
     } else {
       callAlert();

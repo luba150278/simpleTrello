@@ -5,19 +5,18 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { useActions } from '../../../../../../../hooks/useActions';
 
 type Props = {
-  url: string;
   id: number;
   boardID: string;
 };
 
-const DeleteCard: React.FC<Props> = ({ url, id, boardID }) => {
+const DeleteCard: React.FC<Props> = ({ id, boardID }) => {
   const { fetchLists, deleteItem } = useActions();
   return (
     <div className="icon__inner mr-2 my-2">
       <IconContext.Provider value={{ className: 'trash-list' }}>
         <FaTrashAlt
           onClick={(): void => {
-            deleteItem(`${url}/card/${id}`);
+            deleteItem(`${boardID}/card/${id}`);
             fetchLists(boardID);
           }}
         />

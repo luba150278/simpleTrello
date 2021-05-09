@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
-import axios from 'axios';
 import { Dispatch } from 'redux';
+import api from '../../api/request';
+import config from '../../common/constans/api';
 import { ERROR_ITEM_ADD } from '../../common/constans/messages';
 import { ChangeItemActions, ChangeItemActionTypes } from '../types/changeItem';
 
@@ -24,12 +25,7 @@ export const addItem = (url: string, newItem: Card | Board | List) => async (
 ): Promise<void> => {
   try {
     // dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM, payload: false });
-    const lll = await axios.post(url, newItem, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer 123',
-      },
-    });
+    const lll = api.post(`${config.board}/${url}`, newItem);
     console.log(lll);
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_SUCCESS, payload: true });
     // dispatch({ type: 'ADD_BOARDS', boards });

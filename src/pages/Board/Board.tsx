@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Spinner from 'reactstrap/es/Spinner';
-import api from '../../common/constans/api';
 import { useActions } from '../../hooks/useActions';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import BaseModalWrapper from '../Modal/BaseModalWrapper';
@@ -13,7 +12,6 @@ import Lists from './components/Lists/Lists';
 type TParams = { id: string };
 
 const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
-  const url = `${api.baseURL}/board/${match.params.id}`;
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = (): void => {
     setModalVisible((wasModalVisible) => !wasModalVisible);
@@ -41,8 +39,8 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const { title } = getLists;
   return (
     <>
-      <BoardHeader url={url} startTitle={title} boardID={match.params.id} />
-      <Lists url={url} boardID={match.params.id} getLists={getLists} />
+      <BoardHeader startTitle={title} boardID={match.params.id} />
+      <Lists boardID={match.params.id} getLists={getLists} />
       <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
     </>
   );

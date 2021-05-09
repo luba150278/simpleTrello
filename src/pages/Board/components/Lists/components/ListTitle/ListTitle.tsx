@@ -8,7 +8,7 @@ import { useActions } from '../../../../../../hooks/useActions';
 type Props = {
   startTitle: string;
   position: number;
-  url: string;
+  id: string;
   boardID: string;
 };
 
@@ -17,7 +17,7 @@ type Data = {
   title: string;
 };
 
-const ListTitle: React.FC<Props> = ({ startTitle, position, url, boardID }) => {
+const ListTitle: React.FC<Props> = ({ startTitle, position, id, boardID }) => {
   const [title, setTitle] = useState<string>(startTitle);
   const [isAlert, setAlert] = useState<boolean>(false);
   const newPos: Data = { position, title };
@@ -35,7 +35,8 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, url, boardID }) => {
 
   function editTitle(update: boolean): void {
     if (isValidTitle(title)) {
-      editItem(newPos, url);
+      editItem(newPos, `${boardID}/list/${id}`); // /list/<id>
+
       if (update) {
         fetchLists(boardID);
       }

@@ -7,12 +7,11 @@ import AddCard from '../../../AddCard/AddCard';
 import './addCardInput.css';
 
 type Props = {
-  url: string;
   list: IList;
   boardID: string;
 };
 
-const AddCardInput: React.FC<Props> = ({ url, list, boardID }) => {
+const AddCardInput: React.FC<Props> = ({ list, boardID }) => {
   const [isCardAddVisible, setCardAddVisible] = useState(false);
   const toggleCardAdd = (): void => {
     setCardAddVisible((wasVisible) => !wasVisible);
@@ -24,7 +23,7 @@ const AddCardInput: React.FC<Props> = ({ url, list, boardID }) => {
           <FaPlus onClick={toggleCardAdd} />
         </IconContext.Provider>
       </div>
-      {isCardAddVisible ? <AddCard url={url} position={list.position} list_id={list.id} boardID={boardID} /> : null}
+      {isCardAddVisible ? <AddCard position={list.position} list_id={list.id} boardID={boardID} /> : null}
     </div>
   );
 };

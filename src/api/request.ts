@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../common/constans/api';
+import { api } from '../common/constans';
 
 const instance = axios.create({
   baseURL: api.baseURL,
@@ -9,6 +9,6 @@ const instance = axios.create({
   },
 });
 
-instance.interceptors.response.use((res) => res.data);
+// instance.interceptors.response.use((res) => res.data);
 
 export default instance;
