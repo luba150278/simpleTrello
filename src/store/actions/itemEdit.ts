@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ERROR_ITEM_EDIT } from '../../common/constans/messages';
@@ -22,7 +23,7 @@ export const editItem = (newData: Card | Board | List, urlEdit: string) => async
   dispatch: Dispatch<ChangeItemActions>
 ): Promise<void> => {
   try {
-    dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM, payload: false });
+    // dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM, payload: false });
     await axios.put(urlEdit, newData, {
       headers: {
         'Content-Type': 'application/json',
