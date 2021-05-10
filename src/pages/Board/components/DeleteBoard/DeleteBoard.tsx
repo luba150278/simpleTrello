@@ -1,23 +1,25 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import MyContext from '../../../../common/Context';
 import { useActions } from '../../../../hooks/useActions';
 
-type Props = {
-  id: string;
-};
-const DeleteBoard: React.FC<Props> = ({ id }) => {
+const DeleteBoard: React.FC = () => {
   const history = useHistory();
   const { deleteItem } = useActions();
   return (
-    <button
-      className="btn btn-danger deleteBoard ml-4"
-      onClick={(): void => {
-        deleteItem(id);
-        history.push('/');
-      }}
-    >
-      Delete
-    </button>
+    <MyContext.Consumer>
+      {({ boardID }): JSX.Element => (
+        <button
+          className="btn btn-danger deleteBoard ml-4"
+          onClick={(): void => {
+            deleteItem(boardID);
+            history.push('/');
+          }}
+        >
+          Delete
+        </button>
+      )}
+    </MyContext.Consumer>
   );
 };
 

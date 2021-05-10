@@ -10,11 +10,10 @@ import { ILists } from '../../../../interfaces/inrefaces';
 import { ANY_LIST_YET } from '../../../../common/constans/messages';
 
 type Props = {
-  boardID: string;
   getLists: ILists;
 };
 
-const Lists: React.FC<Props> = ({ boardID, getLists }) => {
+const Lists: React.FC<Props> = ({ getLists }) => {
   const arr = Object.keys(getLists.lists);
   const arrLenght = arr.length;
 
@@ -24,16 +23,16 @@ const Lists: React.FC<Props> = ({ boardID, getLists }) => {
         const list = getLists.lists[Number(id)];
         const cards = Object.keys(list.cards).map((idCard) => {
           const card = list.cards[Number(idCard)];
-          return <Card key={card.id} card={card} boardID={boardID} listID={Number(id)} />;
+          return <Card key={card.id} card={card} listID={Number(id)} />;
         });
 
-        return <ListInner key={id} list={list} id={id} boardID={boardID} cards={cards} />;
+        return <ListInner key={id} list={list} id={id} cards={cards} />;
       })
     ) : (
       <h2>{ANY_LIST_YET}</h2>
     );
 
-  return <ListMain arrLenght={arrLenght} boardID={boardID} lists={lists} />;
+  return <ListMain arrLenght={arrLenght} lists={lists} />;
 };
 
 export default Lists;

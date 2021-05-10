@@ -8,19 +8,18 @@ import ListTitle from '../ListTitle/ListTitle';
 type Props = {
   list: IList;
   id: string;
-  boardID: string;
   cards: JSX.Element[];
 };
 
-const ListInner: React.FC<Props> = ({ list, id, boardID, cards }) => (
+const ListInner: React.FC<Props> = ({ list, id, cards }) => (
   <div className="card list mx-2">
-    <DeleteList id={id} boardID={boardID} />
+    <DeleteList id={id} />
     <p>
       {TASKS_NUMBER} {cards.length}
     </p>
-    <ListTitle startTitle={list.title} position={list.position} id={id} boardID={boardID} />
+    <ListTitle startTitle={list.title} position={list.position} id={id} />
     <ul className="list-items">{cards}</ul>
-    <AddCardInput list={list} boardID={boardID} />
+    <AddCardInput list={list} />
   </div>
 );
 

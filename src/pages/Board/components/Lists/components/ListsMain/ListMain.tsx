@@ -4,13 +4,12 @@ import AddList from '../../../AddList/AddList';
 
 type Props = {
   arrLenght: number;
-  boardID: string;
   lists: JSX.Element | JSX.Element[];
 };
-const ListMain: React.FC<Props> = ({ arrLenght, boardID, lists }) => (
+const ListMain: React.FC<Props> = ({ arrLenght, lists }) => (
   <div className="lists-main">
     <div className="input-row mb-4">
-      <AddList countLists={arrLenght} boardID={boardID} />
+      <AddList countLists={arrLenght} />
       <div className="count-lists">
         {LIST_NUMBER} {arrLenght}
       </div>
