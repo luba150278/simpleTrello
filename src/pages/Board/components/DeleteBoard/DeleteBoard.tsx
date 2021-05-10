@@ -11,8 +11,8 @@ const DeleteBoard: React.FC = () => {
       {({ boardID }): JSX.Element => (
         <button
           className="btn btn-danger deleteBoard ml-4"
-          onClick={(): void => {
-            deleteItem(boardID);
+          onClick={async (): Promise<void> => {
+            await deleteItem(boardID);
             history.push('/');
           }}
         >

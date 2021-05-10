@@ -26,11 +26,11 @@ const AddList: React.FC<Props> = ({ countLists }) => {
             setAlert(false);
           }, 3000);
         }
-        function clickHandler(): void {
+        async function clickHandler(): Promise<void> {
           if (isValidTitle(title)) {
             const newList = { title, position: countLists + 1 };
-            addItem(`${boardID}/list`, newList);
-            fetchLists(boardID);
+            await addItem(`${boardID}/list`, newList);
+            await fetchLists(boardID);
           } else {
             callAlert();
           }

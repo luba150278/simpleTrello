@@ -8,8 +8,8 @@ import { ChangeItemActions, ChangeItemActionTypes } from '../types/changeItem';
 export const deleteItem = (url: string) => async (dispatch: Dispatch<ChangeItemActions>): Promise<void> => {
   try {
     // dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM, payload: false });
-    const lll = await api.delete(`${config.board}/${url}`);
-    console.log(lll);
+    await api.delete(`${config.board}/${url}`);
+
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_SUCCESS, payload: true });
   } catch (e) {
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_ERROR, payload: ERROR_ITEM_DELETE });

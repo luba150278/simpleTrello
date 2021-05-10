@@ -25,7 +25,7 @@ export const addItem = (url: string, newItem: Card | Board | List) => async (
 ): Promise<void> => {
   try {
     // dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM, payload: false });
-    api.post(`${config.board}/${url}`, newItem);
+    await api.post(`${config.board}/${url}`, newItem);
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_SUCCESS, payload: true });
     // dispatch({ type: 'ADD_BOARDS', boards });
   } catch (e) {

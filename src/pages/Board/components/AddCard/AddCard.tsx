@@ -27,11 +27,11 @@ const AddCard: React.FC<Props> = ({ position, list_id }) => {
             setAlert(false);
           }, 3000);
         }
-        function clickHandler(): void {
+        async function clickHandler(): Promise<void> {
           if (isValidTitle(title)) {
             const newCard = { title, list_id, position };
-            addItem(`${boardID}/card`, newCard);
-            fetchLists(boardID);
+            await addItem(`${boardID}/card`, newCard);
+            await fetchLists(boardID);
           } else {
             callAlert();
           }

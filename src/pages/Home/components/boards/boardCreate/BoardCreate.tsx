@@ -49,11 +49,11 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
       </div>
       <button
         className="btn btn-success mr-2 btn-new-board"
-        onClick={(): void => {
+        onClick={async (): Promise<void> => {
           if (isValidTitle(title)) {
-            addItem('', newBoard);
+            await addItem('', newBoard);
             setUpAlert(true, false, SUCCESS_BOARD_NAME);
-            fetchBoards();
+            await fetchBoards();
           } else {
             setUpAlert(true, true, DANGER_NAME);
           }
