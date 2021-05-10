@@ -40,7 +40,11 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const { title } = getLists;
   return (
     <>
-      <MyContext.Provider value={{ boardID: match.params.id }}>
+      <MyContext.Provider
+        value={{
+          boardID,
+        }}
+      >
         <BoardHeader startTitle={title} />
         <Lists getLists={getLists} />
         <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
