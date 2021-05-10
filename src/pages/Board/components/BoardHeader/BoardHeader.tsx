@@ -75,7 +75,7 @@ const BoardHeader: React.FC<IData> = ({ startTitle, boardID }) => {
             onBlur={blurHandler}
           />
 
-          <DeleteBoard />
+          <DeleteBoard id={boardID} />
         </div>
       </div>
     </div>

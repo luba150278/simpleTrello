@@ -22,7 +22,6 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
   const newBoard: ITitle = { title };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchBoards } = useActions();
-  // const url = `${api.baseURL}/board`;
 
   function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);

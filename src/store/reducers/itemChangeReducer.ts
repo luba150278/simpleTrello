@@ -10,7 +10,7 @@ export const itemChangeReducer = (state = initialState, action: ChangeItemAction
     case ChangeItemActionTypes.CHANGE_ITEM_SUCCESS:
       return { changeState: true, error: null };
     case ChangeItemActionTypes.CHANGE_ITEM_ERROR:
-      return { changeState: false, error: action.payload };
+      return { changeState: true, error: action.payload };
     default:
       return state;
   }

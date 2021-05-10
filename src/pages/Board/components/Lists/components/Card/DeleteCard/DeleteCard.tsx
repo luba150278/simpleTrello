@@ -15,9 +15,9 @@ const DeleteCard: React.FC<Props> = ({ id, boardID }) => {
     <div className="icon__inner mr-2 my-2">
       <IconContext.Provider value={{ className: 'trash-list' }}>
         <FaTrashAlt
-          onClick={(): void => {
-            deleteItem(`${boardID}/card/${id}`);
-            fetchLists(boardID);
+          onClick={async (): Promise<void> => {
+            await deleteItem(`${boardID}/card/${id}`);
+            await fetchLists(boardID);
           }}
         />
       </IconContext.Provider>
