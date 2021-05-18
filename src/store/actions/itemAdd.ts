@@ -22,13 +22,14 @@ type List = {
 
 export const addItem = (url: string, newItem: Card | Board | List) => async (
   dispatch: Dispatch<ChangeItemActions>
-): Promise<void> => {
+): Promise<string> => {
   try {
-    // dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM, payload: false });
-    await api.post(`${config.board}/${url}`, newItem);
+    const res = await api.post(`${config.board}/${url}`, newItem);
+    console.log(res.data.result);
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_SUCCESS, payload: true });
-    // dispatch({ type: 'ADD_BOARDS', boards });
+    return res.data.result;
   } catch (e) {
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_ERROR, payload: ERROR_ITEM_ADD });
+    return ERROR_ITEM_ADD;
   }
 };

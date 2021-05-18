@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 /* import { connect } from 'react-redux'; */
 import { Link } from 'react-router-dom';
 import { Spinner } from 'reactstrap';
@@ -17,10 +17,9 @@ import './boards.css';
 const Boards: React.FC = () => {
   const { getBoards, error, loading } = useTypeSelector((state) => state.boards);
   const { fetchBoards } = useActions();
-  useLayoutEffect(() => {
+  useEffect(() => {
     const abortController = new AbortController();
     fetchBoards();
-
     return (): void => {
       abortController.abort();
     };

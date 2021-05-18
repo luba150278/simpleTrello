@@ -23,6 +23,8 @@ const Card: React.FC<Props> = ({ card, listID }) => {
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
   const { editItem, fetchLists } = useActions();
+  const [currentList, setCurrentList] = useState(0);
+  const [currentCard, setCurrentCard] = useState(0);
 
   return (
     <MyContext.Consumer>
@@ -49,7 +51,7 @@ const Card: React.FC<Props> = ({ card, listID }) => {
           }
         }
         const keyPressHandler = (event: React.KeyboardEvent): void => {
-          if (event.key === 'Enter' || event.key === 'enter') {
+          if (event.key === 'Enter') {
             editTitle(true);
           }
         };
@@ -64,8 +66,45 @@ const Card: React.FC<Props> = ({ card, listID }) => {
           }
         };
 
+        const dragOverHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.preventDefault();
+        };
+
+        const dropHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.preventDefault();
+          e.currentTarget.style.background = '#EAFCAB';
+          console.log(`${currentList}:${currentCard}`);
+        };
+
+        const dragLeaveHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.currentTarget.style.background = '#EAFCAB';
+        };
+
+        const dragStartHandler = (e: React.DragEvent<HTMLLIElement>, cardID: string): void => {
+          setCurrentCard(Number(cardID));
+          setCurrentList(listID);
+          if (e.currentTarget.id === cardID) {
+            // e.currentTarget.style.display = 'none';
+            e.currentTarget.style.background = 'red';
+          }
+        };
+
+        const dragEndHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.currentTarget.style.background = '#EAFCAB';
+          e.currentTarget.style.display = 'flex';
+        };
+
         return (
-          <li className="card list-item" draggable>
+          <li
+            className="card list-item"
+            id={card.id.toString()}
+            draggable
+            onDragOver={(e): void => dragOverHandler(e)}
+            onDragLeave={dragLeaveHandler}
+            onDragStart={(e): void => dragStartHandler(e, card.id.toString())}
+            onDragEnd={dragEndHandler}
+            onDrop={(e): void => dropHandler(e)}
+          >
             <DeleteCard id={card.id} />
             <Alert show={isAlert} text={DANGER_NAME} danger />
             <div className="card__inner">

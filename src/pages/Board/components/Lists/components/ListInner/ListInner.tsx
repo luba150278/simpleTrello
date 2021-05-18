@@ -18,6 +18,7 @@ const ListInner: React.FC<Props> = ({ list, id, cards }) => (
       {TASKS_NUMBER} {cards.length}
     </p>
     <ListTitle startTitle={list.title} position={list.position} id={id} />
+
     <ul className="list-items">{cards}</ul>
     <AddCardInput list={list} />
   </div>

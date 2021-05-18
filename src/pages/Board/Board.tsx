@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Spinner from 'reactstrap/es/Spinner';
 import MyContext from '../../common/Context';
@@ -21,7 +21,7 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const { getLists, error, loading } = useTypeSelector((state) => state.lists);
   const { fetchLists } = useActions();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const abortController = new AbortController();
     fetchLists(boardID);
     return (): void => {

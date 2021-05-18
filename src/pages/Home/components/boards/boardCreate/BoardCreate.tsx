@@ -30,7 +30,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
     setTimeout(() => {
       setTitle('');
       setAlert(false);
-    }, 3000);
+    }, 5000);
   }
   return (
     <div className="main-container">
@@ -51,9 +51,13 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
         className="btn btn-success mr-2 btn-new-board"
         onClick={async (): Promise<void> => {
           if (isValidTitle(title)) {
-            await addItem('', newBoard);
-            setUpAlert(true, false, SUCCESS_BOARD_NAME);
-            await fetchBoards();
+            const res = await addItem('', newBoard);
+            if (res.toString() === 'Created') {
+              setUpAlert(true, false, SUCCESS_BOARD_NAME);
+              await fetchBoards();
+            } else {
+              setUpAlert(true, true, res.toString());
+            }
           } else {
             setUpAlert(true, true, DANGER_NAME);
           }

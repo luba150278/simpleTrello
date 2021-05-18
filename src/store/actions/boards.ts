@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Dispatch } from 'redux';
 import api from '../../api/request';
 import config from '../../common/constans/api';
@@ -8,7 +9,6 @@ import { BoardsAction, BoardsActionTypes } from '../types/boards';
 export const fetchBoards = () => async (dispatch: Dispatch<BoardsAction>): Promise<void> => {
   try {
     dispatch({ type: BoardsActionTypes.FETCH_BOARDS });
-
     const response = await api.get(config.board);
     dispatch({ type: BoardsActionTypes.FETCH_BOARDS_SUCCESS, payload: response.data });
   } catch (e) {
