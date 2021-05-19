@@ -4,12 +4,13 @@ import AddList from '../../../AddList/AddList';
 
 type Props = {
   arrLenght: number;
+  maxListPos: number;
   lists: JSX.Element | JSX.Element[];
 };
-const ListMain: React.FC<Props> = ({ arrLenght, lists }) => (
+const ListMain: React.FC<Props> = ({ arrLenght, maxListPos, lists }) => (
   <div className="lists-main">
     <div className="input-row mb-4">
-      <AddList countLists={arrLenght} />
+      <AddList maxListPos={maxListPos} />
       <div className="count-lists">
         {LIST_NUMBER} {arrLenght}
       </div>

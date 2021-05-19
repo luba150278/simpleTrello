@@ -25,7 +25,6 @@ export const addItem = (url: string, newItem: Card | Board | List) => async (
 ): Promise<string> => {
   try {
     const res = await api.post(`${config.board}/${url}`, newItem);
-    console.log(res.data.result);
     dispatch({ type: ChangeItemActionTypes.CHANGE_ITEM_SUCCESS, payload: true });
     return res.data.result;
   } catch (e) {

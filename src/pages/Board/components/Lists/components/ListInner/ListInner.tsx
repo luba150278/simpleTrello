@@ -9,9 +9,10 @@ type Props = {
   list: IList;
   id: string;
   cards: JSX.Element[];
+  maxCardPos: number;
 };
 
-const ListInner: React.FC<Props> = ({ list, id, cards }) => (
+const ListInner: React.FC<Props> = ({ list, id, cards, maxCardPos }) => (
   <div className="card list mx-2">
     <DeleteList id={id} />
     <p>
@@ -20,7 +21,7 @@ const ListInner: React.FC<Props> = ({ list, id, cards }) => (
     <ListTitle startTitle={list.title} position={list.position} id={id} />
 
     <ul className="list-items">{cards}</ul>
-    <AddCardInput list={list} />
+    <AddCardInput list={list} maxCardPos={maxCardPos} />
   </div>
 );
 

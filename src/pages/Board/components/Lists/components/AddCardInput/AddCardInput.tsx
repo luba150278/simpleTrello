@@ -8,9 +8,10 @@ import './addCardInput.css';
 
 type Props = {
   list: IList;
+  maxCardPos: number;
 };
 
-const AddCardInput: React.FC<Props> = ({ list }) => {
+const AddCardInput: React.FC<Props> = ({ list, maxCardPos }) => {
   const [isCardAddVisible, setCardAddVisible] = useState(false);
   const toggleCardAdd = (): void => {
     setCardAddVisible((wasVisible) => !wasVisible);
@@ -22,7 +23,7 @@ const AddCardInput: React.FC<Props> = ({ list }) => {
           <FaPlus onClick={toggleCardAdd} />
         </IconContext.Provider>
       </div>
-      {isCardAddVisible ? <AddCard position={list.position} list_id={list.id} /> : null}
+      {isCardAddVisible ? <AddCard position={maxCardPos + 1} list_id={list.id} /> : null}
     </div>
   );
 };

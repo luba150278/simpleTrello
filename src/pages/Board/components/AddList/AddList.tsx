@@ -8,10 +8,10 @@ import { useActions } from '../../../../hooks/useActions';
 import './addList.css';
 
 type Props = {
-  countLists: number;
+  maxListPos: number;
 };
 
-const AddList: React.FC<Props> = ({ countLists }) => {
+const AddList: React.FC<Props> = ({ maxListPos }) => {
   const [title, setTitle] = useState<string>('');
   const [isAlert, setAlert] = useState<boolean>(false);
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
@@ -28,7 +28,7 @@ const AddList: React.FC<Props> = ({ countLists }) => {
         }
         async function clickHandler(): Promise<void> {
           if (isValidTitle(title)) {
-            const newList = { title, position: countLists + 1 };
+            const newList = { title, position: maxListPos + 1 };
             await addItem(`${boardID}/list`, newList);
             await fetchLists(boardID);
           } else {
