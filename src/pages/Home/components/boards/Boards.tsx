@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
-/* import { connect } from 'react-redux'; */
 import { Link } from 'react-router-dom';
 import { Spinner } from 'reactstrap';
 import { ANY_BOARD_YET } from '../../../../common/constans/messages';
 import { colorGenerator } from '../../../../functions/cardColorGenerator';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypeSelector } from '../../../../hooks/useTypeSelector';
-// import { fetchBoards } from '../../../../store/actions/boards';
-/* import { RootState } from '../../../../store/reducers';
-import { BoardsState } from '../../../../store/types/boards'; */
 import './boards.css';
 /**
  * Get boards list from api
@@ -58,9 +54,5 @@ const Boards: React.FC = () => {
     </div>
   );
 };
-
-/* const mapStateToProps = (state: RootState): BoardsState => ({ ...state.boards });
-
-export default connect(mapStateToProps, fetchBoards)(Boards); */
 
 export default Boards;

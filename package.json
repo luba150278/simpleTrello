@@ -1,6 +1,6 @@
 {
   "homepage": "http://luba150278.github.io/simpleTrello",
-  "name": "trello-ala",
+  "name": "simple-trello",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

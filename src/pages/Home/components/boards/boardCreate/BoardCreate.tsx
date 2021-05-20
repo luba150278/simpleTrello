@@ -61,6 +61,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
           } else {
             setUpAlert(true, true, DANGER_NAME);
           }
+          setTitle('');
         }}
       >
         Add board
