@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 import { IList } from '../../../../../../interfaces/inrefaces';
-import AddCard from '../../../AddCard/AddCard';
+import AddCard from '../Card/AddCard/AddCard';
 
-import './addCardInput.css';
+import './addCardField.css';
 
 type Props = {
   list: IList;
   maxCardPos: number;
 };
 
-const AddCardInput: React.FC<Props> = ({ list, maxCardPos }) => {
+const AddCardField: React.FC<Props> = ({ list, maxCardPos }) => {
   const [isCardAddVisible, setCardAddVisible] = useState(false);
   const toggleCardAdd = (): void => {
     setCardAddVisible((wasVisible) => !wasVisible);
@@ -19,7 +19,7 @@ const AddCardInput: React.FC<Props> = ({ list, maxCardPos }) => {
   return (
     <div className="addCardInput">
       <div className="iconPlus__inner">
-        <IconContext.Provider value={{ className: 'trash-list' }}>
+        <IconContext.Provider value={{ className: 'add-card' }}>
           <FaPlus onClick={toggleCardAdd} />
         </IconContext.Provider>
       </div>
@@ -28,4 +28,4 @@ const AddCardInput: React.FC<Props> = ({ list, maxCardPos }) => {
   );
 };
 
-export default AddCardInput;
+export default AddCardField;

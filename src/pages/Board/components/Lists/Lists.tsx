@@ -2,8 +2,8 @@
 import React from 'react';
 import Card from './components/Card/Card';
 import './lists.css';
-import ListMain from './components/ListsMain/ListMain';
-import ListInner from './components/ListInner/ListInner';
+import ListMain from './components/List/ListsMain/ListMain';
+import ListInner from './components/List/ListInner/ListInner';
 import { ILists } from '../../../../interfaces/inrefaces';
 import { ANY_LIST_YET } from '../../../../common/constans/messages';
 

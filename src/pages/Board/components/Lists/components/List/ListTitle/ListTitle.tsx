@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import React, { useRef, useState } from 'react';
-import { DANGER_NAME } from '../../../../../../common/constans/messages';
-import MyContext from '../../../../../../common/Context';
-import InputBlock from '../../../../../../components/InputBlock';
-import { isValidTitle } from '../../../../../../functions/validTitles';
-import { useActions } from '../../../../../../hooks/useActions';
-import { IAlert, IInput } from '../../../../../../interfaces/inrefaces';
+import { DANGER_NAME } from '../../../../../../../common/constans/messages';
+import MyContext from '../../../../../../../common/Context';
+import InputBlock from '../../../../../../../components/InputBlock';
+import { isValidTitle } from '../../../../../../../functions/validTitles';
+import { useActions } from '../../../../../../../hooks/useActions';
+import { IAlert, IInput } from '../../../../../../../interfaces/inrefaces';
 
 type Props = {
   startTitle: string;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { LIST_NUMBER } from '../../../../../../common/constans/messages';
-import AddList from '../../../AddList/AddList';
+import { LIST_NUMBER } from '../../../../../../../common/constans/messages';
+import AddList from '../AddList/AddList';
 
 type Props = {
   arrLenght: number;

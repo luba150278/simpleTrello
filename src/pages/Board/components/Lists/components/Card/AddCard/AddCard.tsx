@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { ADD_CARD, DANGER_NAME } from '../../../../common/constans/messages';
-import MyContext from '../../../../common/Context';
-import { Alert } from '../../../../components/Alert';
-import { isValidTitle } from '../../../../functions/validTitles';
-import { useActions } from '../../../../hooks/useActions';
-import { IAlert } from '../../../../interfaces/inrefaces';
+import { ADD_CARD, DANGER_NAME } from '../../../../../../../common/constans/messages';
+import MyContext from '../../../../../../../common/Context';
+import { Alert } from '../../../../../../../components/Alert';
+import { isValidTitle } from '../../../../../../../functions/validTitles';
+import { useActions } from '../../../../../../../hooks/useActions';
+import { IAlert } from '../../../../../../../interfaces/inrefaces';
 import './addCard.css';
 
 type Props = {

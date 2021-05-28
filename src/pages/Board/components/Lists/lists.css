@@ -77,12 +77,14 @@
   display: flex;
   justify-content: flex-end;
 }
-.trash-list {
+.trash-list,
+.add-card {
   color: rgb(128, 127, 127);
   size: 1em;
 }
 
-.trash-list:hover {
+.trash-list:hover,
+.add-card:hover {
   color: #bb2a81;
   cursor: pointer;
 }

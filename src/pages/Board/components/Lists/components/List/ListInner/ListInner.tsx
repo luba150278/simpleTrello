@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { TASKS_NUMBER } from '../../../../../../common/constans/messages';
-import { IList } from '../../../../../../interfaces/inrefaces';
-import DeleteList from '../../../DeleteList/DeleteList';
-import AddCardInput from '../AddCardInput/AddCardInput';
+import { TASKS_NUMBER } from '../../../../../../../common/constans/messages';
+import { IList } from '../../../../../../../interfaces/inrefaces';
+import DeleteList from '../DeleteList/DeleteList';
+import AddCardField from '../../AddCardField/AddCardField';
 import ListTitle from '../ListTitle/ListTitle';
 
 type Props = {
@@ -22,7 +22,7 @@ const ListInner: React.FC<Props> = ({ list, id, cards, maxCardPos }) => (
     <ListTitle startTitle={list.title} position={list.position} id={id} />
 
     <ul className="list-items">{cards}</ul>
-    <AddCardInput list={list} maxCardPos={maxCardPos} />
+    <AddCardField list={list} maxCardPos={maxCardPos} />
   </div>
 );
 export default ListInner;

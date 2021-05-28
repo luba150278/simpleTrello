@@ -2,8 +2,8 @@
 import React from 'react';
 import { IconContext } from 'react-icons';
 import { FaTrashAlt } from 'react-icons/fa';
-import MyContext from '../../../../common/Context';
-import { useActions } from '../../../../hooks/useActions';
+import MyContext from '../../../../../../../common/Context';
+import { useActions } from '../../../../../../../hooks/useActions';
 
 type Props = {
   id: string;
