@@ -14,7 +14,7 @@ const DeleteCard: React.FC<Props> = ({ id }) => {
   return (
     <MyContext.Consumer>
       {({ boardID }): JSX.Element => (
-        <div className="icon__inner mr-2 my-2">
+        <div className="icon__inner mr-4 my-2">
           <IconContext.Provider value={{ className: 'trash-list' }}>
             <FaTrashAlt
               onClick={async (): Promise<void> => {

@@ -75,6 +75,7 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, id }) => {
               onBlur={blurHandler}
               className="listTitle"
             />
+            <span>{id}</span>
           </div>
         );
       }}

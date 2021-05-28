@@ -12,6 +12,12 @@ type Props = {
 };
 
 const Lists: React.FC<Props> = ({ getLists }) => {
+  const dragStartHandler = (e: React.MouseEvent<HTMLDivElement>): void => {
+    // e.stopPropagation();
+    const target = e.currentTarget as HTMLDivElement;
+
+    console.log(`list:${target.id}`);
+  };
   const arr = Object.keys(getLists.lists).sort((a, b) => {
     const first = getLists.lists[Number(a)].position;
     const second = getLists.lists[Number(b)].position;
@@ -37,7 +43,16 @@ const Lists: React.FC<Props> = ({ getLists }) => {
           maxCardPos = maxCardPos < card.position ? card.position : maxCardPos;
           return <Card key={card.id} card={card} listID={Number(id)} />;
         });
-        return <ListInner key={id} list={list} id={id} cards={cards} maxCardPos={maxCardPos} />;
+        return (
+          <ListInner
+            key={id}
+            list={list}
+            id={id}
+            cards={cards}
+            maxCardPos={maxCardPos}
+            dragStartHandler={dragStartHandler}
+          />
+        );
       })
     ) : (
       <h2>{ANY_LIST_YET}</h2>

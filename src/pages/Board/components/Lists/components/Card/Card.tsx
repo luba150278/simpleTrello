@@ -23,8 +23,6 @@ const Card: React.FC<Props> = ({ card, listID }) => {
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
   const { editItem, fetchLists } = useActions();
-  const [currentList, setCurrentList] = useState(0);
-  const [currentCard, setCurrentCard] = useState(0);
 
   return (
     <MyContext.Consumer>
@@ -66,32 +64,72 @@ const Card: React.FC<Props> = ({ card, listID }) => {
           }
         };
 
+        const getNextElement = (cursorPosition: number, currentElement: HTMLLIElement): HTMLLIElement | null => {
+          // Получаем объект с размерами и координатами
+          const currentElementCoord = currentElement.getBoundingClientRect();
+          // Находим вертикальную координату центра текущего элемента
+          const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+
+          // Если курсор выше центра элемента, возвращаем текущий элемент
+          // В ином случае — следующий DOM-элемент
+          const nextElement =
+            cursorPosition < currentElementCenter
+              ? currentElement
+              : (currentElement.nextElementSibling as HTMLLIElement);
+
+          return nextElement;
+        };
+
         const dragOverHandler = (e: React.DragEvent<HTMLLIElement>): void => {
           e.preventDefault();
+          const activeElement = document
+            ?.querySelector(`.list`)
+            ?.querySelector(`.list-items`)
+            ?.querySelector(`.selected`);
+
+          if (!activeElement) return;
+          const currentElement = e.target as HTMLLIElement;
+
+          // const isMoveable = activeElement !== currentElement && currentElement.classList.contains(`.card`);
+          const isMoveable = activeElement.id !== e.currentTarget.id;
+
+          if (!isMoveable) {
+            return;
+          }
+          const nextElement = getNextElement(e.clientY, currentElement);
+          console.log(`:${activeElement?.id}`);
+          if (!nextElement) return;
+          // Проверяем, нужно ли менять элементы местами
+          if (activeElement === nextElement.previousElementSibling || activeElement.id === nextElement.id) {
+            // Если нет, выходим из функции, чтобы избежать лишних изменений в DOM
+            return;
+          }
+
+          // console.log(nextElement);
+
+          document?.querySelector(`.list`)?.appendChild(activeElement);
         };
 
         const dropHandler = (e: React.DragEvent<HTMLLIElement>): void => {
           e.preventDefault();
-          e.currentTarget.style.background = '#EAFCAB';
-          console.log(`${currentList}:${currentCard}`);
         };
-
+        let a: string;
         const dragLeaveHandler = (e: React.DragEvent<HTMLLIElement>): void => {
-          e.currentTarget.style.background = '#EAFCAB';
+          if (a === e.currentTarget.id) e.currentTarget.style.background = '#EAFCAB';
         };
 
-        const dragStartHandler = (e: React.DragEvent<HTMLLIElement>, cardID: string): void => {
-          setCurrentCard(Number(cardID));
-          setCurrentList(listID);
-          if (e.currentTarget.id === cardID) {
-            // e.currentTarget.style.display = 'none';
-            e.currentTarget.style.background = 'red';
-          }
+        const dragStartHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          const target = e.target as HTMLLIElement;
+          target.style.background = 'gray';
+          target.classList.add(`selected`);
+          a = target.id;
+          console.log(a);
         };
 
         const dragEndHandler = (e: React.DragEvent<HTMLLIElement>): void => {
-          e.currentTarget.style.background = '#EAFCAB';
-          e.currentTarget.style.display = 'flex';
+          const target = e.target as HTMLLIElement;
+          target.classList.remove(`selected`);
+          target.style.background = '#EAFCAB';
         };
 
         return (
@@ -101,7 +139,7 @@ const Card: React.FC<Props> = ({ card, listID }) => {
             draggable
             onDragOver={(e): void => dragOverHandler(e)}
             onDragLeave={dragLeaveHandler}
-            onDragStart={(e): void => dragStartHandler(e, card.id.toString())}
+            onDragStart={(e): void => dragStartHandler(e)}
             onDragEnd={dragEndHandler}
             onDrop={(e): void => dropHandler(e)}
           >
@@ -119,6 +157,7 @@ const Card: React.FC<Props> = ({ card, listID }) => {
                 onBlur={blurHandler}
                 className="listTitle"
               />
+              <span>{card.id}</span>
               {card.description !== '' ? <p>{card.description}</p> : null}
             </div>
           </li>
