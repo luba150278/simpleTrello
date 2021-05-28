@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/simpleTrello/static/css/main.65a1a59c.chunk.css",
-    "main.js": "/simpleTrello/static/js/main.54b0e982.chunk.js",
-    "main.js.map": "/simpleTrello/static/js/main.54b0e982.chunk.js.map",
-    "runtime-main.js": "/simpleTrello/static/js/runtime-main.8208ff63.js",
-    "runtime-main.js.map": "/simpleTrello/static/js/runtime-main.8208ff63.js.map",
-    "static/js/2.9c621a3b.chunk.js": "/simpleTrello/static/js/2.9c621a3b.chunk.js",
-    "static/js/2.9c621a3b.chunk.js.map": "/simpleTrello/static/js/2.9c621a3b.chunk.js.map",
+    "main.css": "/simpleTrello/static/css/main.1690dc84.chunk.css",
+    "main.js": "/simpleTrello/static/js/main.46fd0b8c.chunk.js",
+    "main.js.map": "/simpleTrello/static/js/main.46fd0b8c.chunk.js.map",
+    "runtime-main.js": "/simpleTrello/static/js/runtime-main.358db1f6.js",
+    "runtime-main.js.map": "/simpleTrello/static/js/runtime-main.358db1f6.js.map",
+    "static/js/2.cf0c06c8.chunk.js": "/simpleTrello/static/js/2.cf0c06c8.chunk.js",
+    "static/js/2.cf0c06c8.chunk.js.map": "/simpleTrello/static/js/2.cf0c06c8.chunk.js.map",
     "index.html": "/simpleTrello/index.html",
-    "static/css/main.65a1a59c.chunk.css.map": "/simpleTrello/static/css/main.65a1a59c.chunk.css.map",
-    "static/js/2.9c621a3b.chunk.js.LICENSE.txt": "/simpleTrello/static/js/2.9c621a3b.chunk.js.LICENSE.txt"
+    "static/css/main.1690dc84.chunk.css.map": "/simpleTrello/static/css/main.1690dc84.chunk.css.map",
+    "static/js/2.cf0c06c8.chunk.js.LICENSE.txt": "/simpleTrello/static/js/2.cf0c06c8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.8208ff63.js",
-    "static/js/2.9c621a3b.chunk.js",
-    "static/css/main.65a1a59c.chunk.css",
-    "static/js/main.54b0e982.chunk.js"
+    "static/js/runtime-main.358db1f6.js",
+    "static/js/2.cf0c06c8.chunk.js",
+    "static/css/main.1690dc84.chunk.css",
+    "static/js/main.46fd0b8c.chunk.js"
   ]
 }
