@@ -23,7 +23,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchBoards } = useActions();
 
-  function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
+  function callAlert(alrt: boolean, dang: boolean, text: string): void {
     setAlert(alrt);
     setDanger(dang);
     setTextAlert(text);
@@ -32,6 +32,20 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
       setAlert(false);
     }, 5000);
   }
+  const onClckHandler = async (): Promise<void> => {
+    if (isValidTitle(title)) {
+      const res = await addItem('', newBoard);
+      if (res.toString() === 'Created') {
+        callAlert(true, false, SUCCESS_BOARD_NAME);
+        await fetchBoards();
+      } else {
+        callAlert(true, true, res.toString());
+      }
+    } else {
+      callAlert(true, true, DANGER_NAME);
+    }
+  };
+
   return (
     <div className="main-container">
       <Alert show={isAlert} text={textAlert} danger={isDanger} />
@@ -47,23 +61,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
           />
         </div>
       </div>
-      <button
-        className="btn btn-success mr-2 btn-new-board"
-        onClick={async (): Promise<void> => {
-          if (isValidTitle(title)) {
-            const res = await addItem('', newBoard);
-            if (res.toString() === 'Created') {
-              setUpAlert(true, false, SUCCESS_BOARD_NAME);
-              await fetchBoards();
-            } else {
-              setUpAlert(true, true, res.toString());
-            }
-          } else {
-            setUpAlert(true, true, DANGER_NAME);
-          }
-          setTitle('');
-        }}
-      >
+      <button className="btn btn-success mr-2 btn-new-board" onClick={onClckHandler}>
         Add board
       </button>
     </div>

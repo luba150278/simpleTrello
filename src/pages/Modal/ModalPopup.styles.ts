@@ -33,4 +33,11 @@ export const Close = styled.div`
   &:hover {
     cursor: pointer;
   }
+  .close-icon {
+    color: rgb(128, 127, 127);
+    height: 1rem;
+    &:hover {
+      color: #bb2a81;
+    }
+  }
 `;
