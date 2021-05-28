@@ -2,10 +2,10 @@
 import React, { useRef, useState } from 'react';
 import { DANGER_NAME } from '../../../../../../common/constans/messages';
 import MyContext from '../../../../../../common/Context';
-import { Alert } from '../../../../../../components/Alert';
+import InputBlock from '../../../../../../components/InputBlock';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
-import { ICard } from '../../../../../../interfaces/inrefaces';
+import { IAlert, ICard, IInput } from '../../../../../../interfaces/inrefaces';
 import DeleteCard from './DeleteCard/DeleteCard';
 
 type Props = {
@@ -62,24 +62,22 @@ const Card: React.FC<Props> = ({ card, listID }) => {
             editTitle(true);
           }
         };
-
+        const alertState: IAlert = { isShow: isAlert, isDanger: true, text: DANGER_NAME };
+        const inputData: IInput = {
+          title,
+          ph: card.title,
+          changeHandler,
+          onKeyPress: keyPressHandler,
+          onKeyUp: keyUpHandler,
+          onBlur: blurHandler,
+          cln: 'card__inner',
+          clni: 'listTitle',
+          ref: inputEl,
+        };
         return (
           <li className="card list-item" id={card.id.toString()}>
             <DeleteCard id={card.id} />
-            <Alert isShow={isAlert} text={DANGER_NAME} isDanger />
-            <div className="card__inner">
-              <input
-                ref={inputEl}
-                type="text"
-                placeholder={card.title}
-                value={title}
-                onChange={changeHandler}
-                onKeyPress={keyPressHandler}
-                onKeyUp={keyUpHandler}
-                onBlur={blurHandler}
-                className="listTitle"
-              />
-            </div>
+            <InputBlock alertState={alertState} inputData={inputData} />
           </li>
         );
       }}

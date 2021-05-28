@@ -14,7 +14,7 @@ type Props = {
 };
 
 const ListInner: React.FC<Props> = ({ list, id, cards, maxCardPos }) => (
-  <div className="card list mx-2" id={id}>
+  <div className="card list" id={id}>
     <DeleteList id={id} />
     <p>
       {TASKS_NUMBER} {cards.length}

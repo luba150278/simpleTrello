@@ -8,7 +8,7 @@ type Props = {
   lists: JSX.Element | JSX.Element[];
 };
 const ListMain: React.FC<Props> = ({ arrLenght, maxListPos, lists }) => (
-  <div className="lists-main">
+  <div className="lists-main container">
     <div className="input-row mb-4">
       <AddList maxListPos={maxListPos} />
       <div className="count-lists">

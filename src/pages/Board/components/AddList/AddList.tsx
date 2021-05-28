@@ -5,6 +5,7 @@ import MyContext from '../../../../common/Context';
 import { Alert } from '../../../../components/Alert';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
+import { IAlert } from '../../../../interfaces/inrefaces';
 import './addList.css';
 
 type Props = {
@@ -35,9 +36,10 @@ const AddList: React.FC<Props> = ({ maxListPos }) => {
             callAlert();
           }
         }
+        const alertState: IAlert = { isShow: isAlert, isDanger: true, text: DANGER_NAME };
         return (
           <div className="list-input-outside">
-            <Alert isShow={isAlert} text={DANGER_NAME} isDanger />
+            <Alert alertState={alertState} />
             <div className="list-input mt-2">
               <input type="text" id="addList" placeholder="Enter list name" onChange={changeHandler} value={title} />
               <button className="btn btn-primary ml-2" onClick={clickHandler}>

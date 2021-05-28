@@ -10,9 +10,10 @@ nav {
 }
 .board-header-title {
   display: flex;
-  flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
+  box-sizing: border-box;
 }
 .input-row {
   display: flex;
@@ -21,7 +22,9 @@ nav {
   flex-wrap: wrap;
 }
 .deleteBoard {
-  height: 80%;
+  position: absolute;
+  top: 10%;
+  right: 3%;
 }
 .cards {
   display: flex;

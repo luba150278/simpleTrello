@@ -5,6 +5,7 @@ import MyContext from '../../../../common/Context';
 import { Alert } from '../../../../components/Alert';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
+import { IAlert } from '../../../../interfaces/inrefaces';
 import './addCard.css';
 
 type Props = {
@@ -36,9 +37,10 @@ const AddCard: React.FC<Props> = ({ position, list_id }) => {
             callAlert();
           }
         }
+        const alertState: IAlert = { isShow: isAlert, isDanger: true, text: DANGER_NAME };
         return (
           <div className="card-input-outside">
-            <Alert isShow={isAlert} text={DANGER_NAME} isDanger />
+            <Alert alertState={alertState} />
             <div className="card-input mt-2">
               <input
                 className="card-title"

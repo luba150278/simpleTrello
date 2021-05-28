@@ -1,3 +1,5 @@
+import { LegacyRef } from 'react';
+
 export interface IUser {
   id: number;
   username: string;
@@ -37,4 +39,16 @@ export interface IAlert {
   isShow: boolean;
   isDanger: boolean;
   text: string;
+}
+
+export interface IInput {
+  title: string;
+  ph: string;
+  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress: (event: React.KeyboardEvent) => void;
+  onKeyUp: () => void;
+  onBlur: () => void;
+  cln: string;
+  clni: string;
+  ref: LegacyRef<HTMLInputElement> | undefined;
 }

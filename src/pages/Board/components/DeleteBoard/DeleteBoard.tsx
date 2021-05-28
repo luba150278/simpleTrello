@@ -1,4 +1,6 @@
 import React from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
+import { IconContext } from 'react-icons/lib';
 import { useHistory } from 'react-router-dom';
 import MyContext from '../../../../common/Context';
 import { useActions } from '../../../../hooks/useActions';
@@ -9,15 +11,14 @@ const DeleteBoard: React.FC = () => {
   return (
     <MyContext.Consumer>
       {({ boardID }): JSX.Element => (
-        <button
-          className="btn btn-danger deleteBoard ml-4"
-          onClick={async (): Promise<void> => {
-            await deleteItem(boardID);
-            history.push('/');
-          }}
-        >
-          Delete
-        </button>
+        <IconContext.Provider value={{ className: 'trash-list deleteBoard' }}>
+          <FaTrashAlt
+            onClick={async (): Promise<void> => {
+              await deleteItem(boardID);
+              history.push('/');
+            }}
+          />
+        </IconContext.Provider>
       )}
     </MyContext.Consumer>
   );

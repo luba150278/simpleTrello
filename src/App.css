@@ -27,6 +27,7 @@
   color: #00887a;
   font-weight: 500;
   border: none;
+  text-align: center;
 }
 .h1:focus {
   border: 2px solid #00887a;

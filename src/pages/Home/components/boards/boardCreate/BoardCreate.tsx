@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../../../common/constans/messages';
-import { Alert } from '../../../../../components/Alert';
+import { ADD_BOARD, DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../../../common/constans/messages';
+import InputBlock from '../../../../../components/InputBlock';
 import { callAlert } from '../../../../../functions/callAlert';
 import { isValidTitle } from '../../../../../functions/validTitles';
 import { useActions } from '../../../../../hooks/useActions';
-import { IAlert } from '../../../../../interfaces/inrefaces';
+import { IAlert, IInput } from '../../../../../interfaces/inrefaces';
 import './boardCreate.css';
 
 type ITitle = {
@@ -24,7 +24,7 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchBoards } = useActions();
 
-  const onClckHandler = async (): Promise<void> => {
+  const addFunction = async (): Promise<void> => {
     if (isValidTitle(title)) {
       const res = await addItem('', newBoard);
       if (res.toString() === 'Created') {
@@ -41,24 +41,41 @@ const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
       setAlertState(callAlert(false, false, ''));
     }, 5000);
   };
+  const onClckHandler = async (): Promise<void> => {
+    addFunction();
+  };
 
+  const keyPressHandler = (event: React.KeyboardEvent): void => {
+    if (event.key === 'Enter') {
+      addFunction();
+    }
+  };
+
+  const keyUpHandler = (): void => {
+    ('');
+  };
+
+  const blurHandler = (): void => {
+    ('');
+  };
+
+  const inputData: IInput = {
+    title,
+    ph: 'Enter board name',
+    changeHandler,
+    onKeyPress: keyPressHandler,
+    onKeyUp: keyUpHandler,
+    onBlur: blurHandler,
+    cln: 'fields mb-4',
+    clni: 'inputName',
+    ref: null,
+  };
   return (
     <div className="main-container">
-      <Alert isShow={alertState.isShow} isDanger={alertState.isDanger} text={alertState.text} />
-      <div className="fields mb-4">
-        <div className="field mr-4">
-          <input
-            onChange={changeHandler}
-            value={title}
-            type="text"
-            id="title"
-            placeholder="Enter board name"
-            className="inputName"
-          />
-        </div>
-      </div>
+      <InputBlock alertState={alertState} inputData={inputData} />
+
       <button className="btn btn-success mr-2 btn-new-board" onClick={onClckHandler}>
-        Add board
+        {ADD_BOARD}
       </button>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import InputTitle from './components/InputTitle';
+import InputTitle from './components/BoardTitle';
 
 type IData = {
   startTitle: string;

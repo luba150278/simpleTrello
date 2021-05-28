@@ -1,5 +1,8 @@
 .boards-row {
   justify-content: space-around;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
 }
 .card {
   min-height: 50px;
@@ -11,4 +14,24 @@
   color: #25306c;
   font-weight: bold;
   margin-bottom: 20px;
+  box-sizing: border-box;
+  width: 24%;
+}
+
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 98%;
+  }
 }

@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { DANGER_NAME } from '../../../../../common/constans/messages';
 import MyContext from '../../../../../common/Context';
-import { Alert } from '../../../../../components/Alert';
+import InputBlock from '../../../../../components/InputBlock';
 import { callAlert } from '../../../../../functions/callAlert';
 import { isValidTitle } from '../../../../../functions/validTitles';
 import { useActions } from '../../../../../hooks/useActions';
-import { IAlert } from '../../../../../interfaces/inrefaces';
+import { IAlert, IInput } from '../../../../../interfaces/inrefaces';
 import DeleteBoard from '../../DeleteBoard/DeleteBoard';
 
 type IData = {
@@ -57,25 +57,21 @@ const InputTitle: React.FC<IData> = ({ startTitle }) => {
             fetchLists(boardID);
           }
         };
-
+        const inputData: IInput = {
+          title,
+          ph: title,
+          changeHandler,
+          onKeyPress: keyPressHandler,
+          onKeyUp: keyUpHandler,
+          onBlur: blurHandler,
+          cln: 'input-row',
+          clni: 'h1',
+          ref: inputEl,
+        };
         return (
-          <div className="board-header-title mt-4">
-            <Alert isShow={alertState.isShow} text={alertState.text} isDanger={alertState.isDanger} />
-            <div className="input-row">
-              <input
-                className="h1"
-                ref={inputEl}
-                type="text"
-                placeholder={title}
-                value={title}
-                onChange={changeHandler}
-                onKeyPress={keyPressHandler}
-                onKeyUp={keyUpHandler}
-                onBlur={blurHandler}
-              />
-
-              <DeleteBoard />
-            </div>
+          <div className="card board-header-title mt-4 py-2">
+            <InputBlock alertState={alertState} inputData={inputData} />
+            <DeleteBoard />
           </div>
         );
       }}

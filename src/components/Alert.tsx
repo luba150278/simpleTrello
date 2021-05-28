@@ -1,10 +1,13 @@
 import React from 'react';
 import { IAlert } from '../interfaces/inrefaces';
 
-export const Alert: React.FC<IAlert> = ({ isShow, isDanger, text }) =>
-  isShow ? (
-    <div className={isDanger ? 'alert alert-danger' : 'alert alert-success'} role="alert">
-      {text}
+type Props = {
+  alertState: IAlert;
+};
+export const Alert: React.FC<Props> = ({ alertState }) =>
+  alertState.isShow ? (
+    <div className={alertState.isDanger ? 'alert alert-danger' : 'alert alert-success'} role="alert">
+      {alertState.text}
     </div>
   ) : (
     <></>
