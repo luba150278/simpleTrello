@@ -5,7 +5,7 @@ import Spinner from 'reactstrap/es/Spinner';
 import MyContext from '../../common/Context';
 import { useActions } from '../../hooks/useActions';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
-import BaseModalWrapper from '../Modal/BaseModalWrapper';
+import ModalWrapper from '../Modal/ModalWrapper';
 import './board.css';
 import BoardHeader from './components/BoardHeader/BoardHeader';
 import Lists from './components/Lists/Lists';
@@ -47,7 +47,7 @@ const Board: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
       >
         <BoardHeader startTitle={title} />
         <Lists getLists={getLists} />
-        <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
+        <ModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
       </MyContext.Provider>
     </>
   );

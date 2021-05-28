@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ADD_BOARD, BOARDS, HOME_PAGE_DESC } from '../../common/constans/messages';
-import BaseModalWrapper from '../Modal/BaseModalWrapper';
+import ModalWrapper from '../Modal/ModalWrapper';
 import Boards from './components/boards/Boards';
 /**
  * The page has 3 components: the "Add Board" button, the board's list, and modal window (MW) for add a new board.
@@ -24,7 +24,7 @@ const Main: React.FC = () => {
         <p>{HOME_PAGE_DESC}</p>
         <Boards />
       </div>
-      <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
+      <ModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
     </section>
   );
 };

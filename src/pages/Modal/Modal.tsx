@@ -1,28 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import './modal.css';
 
 interface ModalProps {
   onBackDropClick: () => void;
 }
 
-const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Modal: React.FC<ModalProps> = ({ onBackDropClick, children }) =>
   ReactDOM.createPortal(
-    <Overlay onClick={onBackDropClick}>
+    <div className="overlay" onClick={onBackDropClick}>
       <div onClick={(e): void => e.stopPropagation()}>{children}</div>
-    </Overlay>,
+    </div>,
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById('modal-root')!
   );
