@@ -66,7 +66,7 @@ const Card: React.FC<Props> = ({ card, listID }) => {
         return (
           <li className="card list-item" id={card.id.toString()}>
             <DeleteCard id={card.id} />
-            <Alert show={isAlert} text={DANGER_NAME} danger />
+            <Alert isShow={isAlert} text={DANGER_NAME} isDanger />
             <div className="card__inner">
               <input
                 ref={inputEl}

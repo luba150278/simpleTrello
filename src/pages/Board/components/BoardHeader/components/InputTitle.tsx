@@ -2,8 +2,10 @@ import React, { useRef, useState } from 'react';
 import { DANGER_NAME } from '../../../../../common/constans/messages';
 import MyContext from '../../../../../common/Context';
 import { Alert } from '../../../../../components/Alert';
+import { callAlert } from '../../../../../functions/callAlert';
 import { isValidTitle } from '../../../../../functions/validTitles';
 import { useActions } from '../../../../../hooks/useActions';
+import { IAlert } from '../../../../../interfaces/inrefaces';
 import DeleteBoard from '../../DeleteBoard/DeleteBoard';
 
 type IData = {
@@ -17,23 +19,13 @@ type ITitle = {
 const InputTitle: React.FC<IData> = ({ startTitle }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState<string>(startTitle);
-  const [isAlert, setAlert] = useState<boolean>(false);
-  const [isDanger, setDanger] = useState<boolean>(false);
-  const [textAlert, setTextAlert] = useState<string>('');
+  const startAlert: IAlert = { isShow: false, isDanger: false, text: '' };
+  const [alertState, setAlertState] = useState<IAlert>(startAlert);
   const { editItem, fetchLists } = useActions();
 
   return (
     <MyContext.Consumer>
       {({ boardID }): JSX.Element => {
-        function setUpAlert(alrt: boolean, dang: boolean, text: string): void {
-          setAlert(alrt);
-          setDanger(dang);
-          setTextAlert(text);
-          setTimeout(() => {
-            setTitle(startTitle);
-            setAlert(false);
-          }, 3000);
-        }
         const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
         const newData: ITitle = { title };
 
@@ -41,7 +33,11 @@ const InputTitle: React.FC<IData> = ({ startTitle }) => {
           if (isValidTitle(title)) {
             editItem(newData, boardID);
           } else {
-            setUpAlert(true, true, DANGER_NAME);
+            setAlertState(callAlert(true, true, DANGER_NAME));
+            setTimeout(() => {
+              setTitle(startTitle);
+              setAlertState(callAlert(false, false, ''));
+            }, 3000);
           }
         }
         const keyPressHandler = (event: React.KeyboardEvent): void => {
@@ -64,7 +60,7 @@ const InputTitle: React.FC<IData> = ({ startTitle }) => {
 
         return (
           <div className="board-header-title mt-4">
-            <Alert show={isAlert} text={textAlert} danger={isDanger} />
+            <Alert isShow={alertState.isShow} text={alertState.text} isDanger={alertState.isDanger} />
             <div className="input-row">
               <input
                 className="h1"

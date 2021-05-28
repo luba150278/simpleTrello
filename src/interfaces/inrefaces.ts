@@ -32,3 +32,9 @@ export interface IBoard {
 export interface IBoards {
   boards: IBoard[];
 }
+
+export interface IAlert {
+  isShow: boolean;
+  isDanger: boolean;
+  text: string;
+}

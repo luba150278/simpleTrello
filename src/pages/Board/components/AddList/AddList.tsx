@@ -37,7 +37,7 @@ const AddList: React.FC<Props> = ({ maxListPos }) => {
         }
         return (
           <div className="list-input-outside">
-            <Alert show={isAlert} text={DANGER_NAME} danger />
+            <Alert isShow={isAlert} text={DANGER_NAME} isDanger />
             <div className="list-input mt-2">
               <input type="text" id="addList" placeholder="Enter list name" onChange={changeHandler} value={title} />
               <button className="btn btn-primary ml-2" onClick={clickHandler}>

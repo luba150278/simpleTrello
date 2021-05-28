@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
-// import { api } from '../../../../../common/constans';
 import { DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../../../common/constans/messages';
 import { Alert } from '../../../../../components/Alert';
+import { callAlert } from '../../../../../functions/callAlert';
 import { isValidTitle } from '../../../../../functions/validTitles';
 import { useActions } from '../../../../../hooks/useActions';
+import { IAlert } from '../../../../../interfaces/inrefaces';
 import './boardCreate.css';
 
 type ITitle = {
@@ -14,41 +15,36 @@ type ITitle = {
 type IProps = {
   startTitle: string;
 };
+
 const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
   const [title, setTitle] = useState<string>(startTitle);
-  const [isAlert, setAlert] = useState<boolean>(false);
-  const [isDanger, setDanger] = useState<boolean>(false);
-  const [textAlert, setTextAlert] = useState<string>('');
+  const startAlert: IAlert = { isShow: false, isDanger: false, text: '' };
+  const [alertState, setAlertState] = useState<IAlert>(startAlert);
   const newBoard: ITitle = { title };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchBoards } = useActions();
 
-  function callAlert(alrt: boolean, dang: boolean, text: string): void {
-    setAlert(alrt);
-    setDanger(dang);
-    setTextAlert(text);
-    setTimeout(() => {
-      setTitle('');
-      setAlert(false);
-    }, 5000);
-  }
   const onClckHandler = async (): Promise<void> => {
     if (isValidTitle(title)) {
       const res = await addItem('', newBoard);
       if (res.toString() === 'Created') {
-        callAlert(true, false, SUCCESS_BOARD_NAME);
+        setAlertState(callAlert(true, false, SUCCESS_BOARD_NAME));
         await fetchBoards();
       } else {
-        callAlert(true, true, res.toString());
+        setAlertState(callAlert(true, true, res.toString()));
       }
     } else {
-      callAlert(true, true, DANGER_NAME);
+      setAlertState(callAlert(true, true, DANGER_NAME));
     }
+    setTimeout(() => {
+      setTitle('');
+      setAlertState(callAlert(false, false, ''));
+    }, 5000);
   };
 
   return (
     <div className="main-container">
-      <Alert show={isAlert} text={textAlert} danger={isDanger} />
+      <Alert isShow={alertState.isShow} isDanger={alertState.isDanger} text={alertState.text} />
       <div className="fields mb-4">
         <div className="field mr-4">
           <input

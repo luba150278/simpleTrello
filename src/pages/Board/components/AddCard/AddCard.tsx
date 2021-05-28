@@ -38,7 +38,7 @@ const AddCard: React.FC<Props> = ({ position, list_id }) => {
         }
         return (
           <div className="card-input-outside">
-            <Alert show={isAlert} text={DANGER_NAME} danger />
+            <Alert isShow={isAlert} text={DANGER_NAME} isDanger />
             <div className="card-input mt-2">
               <input
                 className="card-title"

@@ -63,7 +63,7 @@ const ListTitle: React.FC<Props> = ({ startTitle, position, id }) => {
         };
         return (
           <div className="listTitleMain">
-            <Alert show={isAlert} text={DANGER_NAME} danger />
+            <Alert isShow={isAlert} text={DANGER_NAME} isDanger />
             <input
               ref={inputEl}
               type="text"
