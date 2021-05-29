@@ -28,12 +28,19 @@ const ListInner: React.FC<Props> = ({ list, id, cards, maxCardPos, currentCard, 
           const target = Number(e.currentTarget.id);
           await deleteItem(`${boardID}/card/${currentCard}`);
           const newCard = { title: currentCardTitle, list_id: target, position };
-          console.log(newCard);
           await addItem(`${boardID}/card`, newCard);
           await fetchLists(boardID);
         };
+        const dragOverHandler = (e: React.DragEvent<HTMLDivElement>): void => {
+          e.preventDefault();
+        };
         return (
-          <div className="card list" id={id} onDrop={(e): Promise<void> => dropHandler(e)}>
+          <div
+            className="card list"
+            id={id}
+            onDrop={(e): Promise<void> => dropHandler(e)}
+            onDragOver={(e): void => dragOverHandler(e)}
+          >
             <DeleteList id={id} />
             <p>
               {TASKS_NUMBER} {cards.length}

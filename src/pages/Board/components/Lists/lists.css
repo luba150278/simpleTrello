@@ -59,7 +59,10 @@
   align-items: center;
   background: rgb(234, 252, 171);
 }
-
+.card.list-item.selected {
+  background: gray;
+  height: 60px;
+}
 .card.list-item:hover {
   background: #a7ffeb;
   cursor: pointer;

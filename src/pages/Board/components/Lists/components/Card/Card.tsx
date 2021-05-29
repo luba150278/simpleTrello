@@ -13,13 +13,14 @@ type Props = {
   listID: number;
   onCurrentCard: (cardID: number) => void;
   onCurrentCardTitle: (cardTitle: string) => void;
+  activeCard: number;
 };
 type Data = {
   title: string;
   list_id: number;
 };
 
-const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle }) => {
+const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle, activeCard }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
@@ -76,31 +77,58 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
           clni: 'listTitle',
           ref: inputEl,
         };
+        const getNextElement = (cursorPosition: number, currentElement: HTMLLIElement): HTMLLIElement => {
+          // Получаем объект с размерами и координатами
+          const currentElementCoord = currentElement.getBoundingClientRect();
+          // Находим вертикальную координату центра текущего элемента
+          const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
 
+          // Если курсор выше центра элемента, возвращаем текущий элемент
+          // В ином случае — следующий DOM-элемент
+          const nextElement =
+            cursorPosition < currentElementCenter
+              ? currentElement
+              : (currentElement.nextElementSibling as HTMLLIElement);
+
+          return nextElement;
+        };
         const dragOverHandler = (e: React.DragEvent<HTMLLIElement>): void => {
           e.preventDefault();
-          console.log(e);
         };
-        const dragLeaveHandler = (e: React.DragEvent<HTMLLIElement>): void => {
-          console.log(e);
+
+        const dragEnterHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.preventDefault();
+          const activeElement = document.getElementById(activeCard.toString()) as HTMLLIElement;
+          const currentElement = e.currentTarget as HTMLLIElement;
+          const nextElement = getNextElement(e.clientY, currentElement) as HTMLLIElement;
+          // Проверяем, нужно ли менять элементы местами
+          if ((nextElement && activeElement === nextElement.previousElementSibling) || activeElement === nextElement) {
+            return;
+          }
+
+          try {
+            document.getElementById(listID.toString())?.insertBefore(activeElement, nextElement);
+          } catch (err) {
+            document.getElementById(listID.toString())?.append(activeElement, nextElement);
+          }
         };
-        const dragStartHandler = (e: React.DragEvent<HTMLLIElement>): void => {
-          console.log(e);
+        const dragLeaveHandler = (): void => {
+          console.log('e');
+        };
+        const dragStartHandler = (): void => {
           onCurrentCard(card.id);
           onCurrentCardTitle(card.title);
         };
-        const dragEndHandler = (e: React.DragEvent<HTMLLIElement>): void => {
-          console.log(e);
-        };
+
         return (
           <li
             className="card list-item"
             id={card.id.toString()}
             draggable
             onDragOver={(e): void => dragOverHandler(e)}
-            onDragLeave={(e): void => dragLeaveHandler(e)}
-            onDragStart={(e): void => dragStartHandler(e)}
-            onDragEnd={(e): void => dragEndHandler(e)}
+            onDragLeave={(): void => dragLeaveHandler()}
+            onDragStart={(): void => dragStartHandler()}
+            onDragEnter={(e): void => dragEnterHandler(e)}
           >
             <DeleteCard id={card.id} />
             <InputBlock alertState={alertState} inputData={inputData} />

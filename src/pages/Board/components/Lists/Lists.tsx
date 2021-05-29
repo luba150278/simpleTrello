@@ -50,6 +50,7 @@ const Lists: React.FC<Props> = ({ getLists }) => {
               listID={Number(id)}
               onCurrentCard={cardVal}
               onCurrentCardTitle={cardTitleVal}
+              activeCard={currentCard}
             />
           );
         });
