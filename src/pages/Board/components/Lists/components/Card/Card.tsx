@@ -11,13 +11,15 @@ import DeleteCard from './DeleteCard/DeleteCard';
 type Props = {
   card: ICard;
   listID: number;
+  onCurrentCard: (cardID: number) => void;
+  onCurrentCardTitle: (cardTitle: string) => void;
 };
 type Data = {
   title: string;
   list_id: number;
 };
 
-const Card: React.FC<Props> = ({ card, listID }) => {
+const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
@@ -74,10 +76,35 @@ const Card: React.FC<Props> = ({ card, listID }) => {
           clni: 'listTitle',
           ref: inputEl,
         };
+
+        const dragOverHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.preventDefault();
+          console.log(e);
+        };
+        const dragLeaveHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          console.log(e);
+        };
+        const dragStartHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          console.log(e);
+          onCurrentCard(card.id);
+          onCurrentCardTitle(card.title);
+        };
+        const dragEndHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          console.log(e);
+        };
         return (
-          <li className="card list-item" id={card.id.toString()}>
+          <li
+            className="card list-item"
+            id={card.id.toString()}
+            draggable
+            onDragOver={(e): void => dragOverHandler(e)}
+            onDragLeave={(e): void => dragLeaveHandler(e)}
+            onDragStart={(e): void => dragStartHandler(e)}
+            onDragEnd={(e): void => dragEndHandler(e)}
+          >
             <DeleteCard id={card.id} />
             <InputBlock alertState={alertState} inputData={inputData} />
+            <span>{card.id}</span>
           </li>
         );
       }}

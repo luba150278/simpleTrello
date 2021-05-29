@@ -16,7 +16,6 @@ const InputBlock: React.FC<Props> = ({ alertState, inputData }) => (
       onBlur={inputData.onBlur}
       value={inputData.title}
       type="text"
-      id="title"
       placeholder={inputData.ph}
       className={inputData.clni}
       ref={inputData.ref}
