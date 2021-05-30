@@ -24,7 +24,19 @@ const Main: React.FC = () => {
         <p>{HOME_PAGE_DESC}</p>
         <Boards />
       </div>
-      <ModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} startTitle="" />
+      <ModalWrapper
+        isModalVisible={isModalVisible}
+        onBackDropClick={toggleModal}
+        startTitle=""
+        isCard={false}
+        card={{
+          id: 0,
+          position: 0,
+          title: '',
+          description: '',
+          users: [0],
+        }}
+      />
     </section>
   );
 };

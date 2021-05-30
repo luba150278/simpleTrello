@@ -14,13 +14,14 @@ type Props = {
   onCurrentCard: (cardID: number) => void;
   onCurrentCardTitle: (cardTitle: string) => void;
   activeCard: number;
+  onBackDropClick: () => void;
 };
 type Data = {
   title: string;
   list_id: number;
 };
 
-const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle, activeCard }) => {
+const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle, activeCard, onBackDropClick }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
@@ -51,6 +52,7 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
           }
         }
         const keyPressHandler = (event: React.KeyboardEvent): void => {
+          event.stopPropagation();
           if (event.key === 'Enter') {
             editTitle(true);
           }
@@ -101,6 +103,7 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
           const activeElement = document.getElementById(activeCard.toString()) as HTMLLIElement;
           const currentElement = e.currentTarget as HTMLLIElement;
           const nextElement = getNextElement(e.clientY, currentElement) as HTMLLIElement;
+          console.log(nextElement.id);
           // Проверяем, нужно ли менять элементы местами
           if ((nextElement && activeElement === nextElement.previousElementSibling) || activeElement === nextElement) {
             return;
@@ -129,6 +132,7 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
             onDragLeave={(): void => dragLeaveHandler()}
             onDragStart={(): void => dragStartHandler()}
             onDragEnter={(e): void => dragEnterHandler(e)}
+            onDoubleClick={onBackDropClick}
           >
             <DeleteCard id={card.id} />
             <InputBlock alertState={alertState} inputData={inputData} />
