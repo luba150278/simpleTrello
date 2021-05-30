@@ -16,13 +16,7 @@ interface BaseModalWrapperProps {
   card: ICard;
 }
 
-const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({
-  isModalVisible,
-  onBackDropClick,
-  startTitle,
-  isCard,
-  card,
-}) => {
+const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({ isModalVisible, onBackDropClick, isCard, card }) => {
   if (!isModalVisible) {
     return null;
   }
@@ -35,7 +29,7 @@ const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({
         </IconContext.Provider>
       </Close>
       <Header>{headerTitle}</Header>
-      {!isCard ? <BoardCreate startTitle={startTitle} /> : <CardDisplay card={card} />}
+      {!isCard ? <BoardCreate /> : <CardDisplay card={card} />}
     </DesktopModalContainer>
   );
 

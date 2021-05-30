@@ -12,12 +12,8 @@ type ITitle = {
   title: string;
 };
 
-type IProps = {
-  startTitle: string;
-};
-
-const BoardCreate: React.FC<IProps> = ({ startTitle }) => {
-  const [title, setTitle] = useState<string>(startTitle);
+const BoardCreate: React.FC = () => {
+  const [title, setTitle] = useState<string>('');
   const startAlert: IAlert = { isShow: false, isDanger: false, text: '' };
   const [alertState, setAlertState] = useState<IAlert>(startAlert);
   const newBoard: ITitle = { title };
