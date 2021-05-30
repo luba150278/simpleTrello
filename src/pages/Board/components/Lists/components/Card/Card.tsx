@@ -6,6 +6,7 @@ import InputBlock from '../../../../../../components/InputBlock';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
 import { IAlert, ICard, IInput } from '../../../../../../interfaces/inrefaces';
+import ModalWrapper from '../../../../../Modal/ModalWrapper';
 import DeleteCard from './DeleteCard/DeleteCard';
 
 type Props = {
@@ -14,19 +15,21 @@ type Props = {
   onCurrentCard: (cardID: number) => void;
   onCurrentCardTitle: (cardTitle: string) => void;
   activeCard: number;
-  onBackDropClick: () => void;
 };
 type Data = {
   title: string;
   list_id: number;
 };
 
-const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle, activeCard, onBackDropClick }) => {
+const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle, activeCard }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
   const { editItem, fetchLists } = useActions();
-
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = (): void => {
+    setModalVisible((wasModalVisible) => !wasModalVisible);
+  };
   return (
     <MyContext.Consumer>
       {({ boardID }): JSX.Element => {
@@ -123,7 +126,7 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
           onCurrentCardTitle(card.title);
         };
 
-        return (
+        return !isModalVisible ? (
           <li
             className="card list-item"
             id={card.id.toString()}
@@ -132,12 +135,20 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
             onDragLeave={(): void => dragLeaveHandler()}
             onDragStart={(): void => dragStartHandler()}
             onDragEnter={(e): void => dragEnterHandler(e)}
-            onDoubleClick={onBackDropClick}
+            onDoubleClick={toggleModal}
           >
             <DeleteCard id={card.id} />
             <InputBlock alertState={alertState} inputData={inputData} />
             <span>{card.id}</span>
           </li>
+        ) : (
+          <ModalWrapper
+            isModalVisible={isModalVisible}
+            onBackDropClick={toggleModal}
+            startTitle=""
+            isCard
+            card={card}
+          />
         );
       }}
     </MyContext.Consumer>

@@ -4,16 +4,14 @@ import Card from './components/Card/Card';
 import './lists.css';
 import ListMain from './components/List/ListsMain/ListMain';
 import ListInner from './components/List/ListInner/ListInner';
-import { ICard, ILists } from '../../../../interfaces/inrefaces';
 import { ANY_LIST_YET } from '../../../../common/constans/messages';
+import { ILists } from '../../../../interfaces/inrefaces';
 
 type Props = {
   getLists: ILists;
-  onBackDropClick: () => void;
-  onCard: (card: ICard) => void;
 };
 
-const Lists: React.FC<Props> = ({ getLists, onBackDropClick, onCard }) => {
+const Lists: React.FC<Props> = ({ getLists }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const cardVal = (cardID: number): void => {
     setCurrentCard(cardID);
@@ -44,7 +42,6 @@ const Lists: React.FC<Props> = ({ getLists, onBackDropClick, onCard }) => {
         });
         const cards = cds.map((idCard) => {
           const card = list.cards[Number(idCard)];
-          onCard(card);
           maxCardPos = maxCardPos < card.position ? card.position : maxCardPos;
           return (
             <Card
@@ -54,7 +51,6 @@ const Lists: React.FC<Props> = ({ getLists, onBackDropClick, onCard }) => {
               onCurrentCard={cardVal}
               onCurrentCardTitle={cardTitleVal}
               activeCard={currentCard}
-              onBackDropClick={onBackDropClick}
             />
           );
         });
