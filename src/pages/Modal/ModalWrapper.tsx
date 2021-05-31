@@ -4,14 +4,13 @@ import { FaTimes } from 'react-icons/fa';
 import { ADD_BOARD_TITLE } from '../../common/constans/messages';
 import { ICard } from '../../interfaces/inrefaces';
 import CardDisplay from '../Board/components/Lists/components/Card/CardDisplay/CardDisplay';
-import BoardCreate from '../Home/components/boards/boardCreate/BoardCreate';
+import BoardCreate from '../Home/components/BoardCreate/BoardCreate';
 import Modal from './Modal';
 import { Close, DesktopModalContainer, Header } from './ModalPopup.styles';
 
 interface BaseModalWrapperProps {
   isModalVisible: boolean;
   onBackDropClick: () => void;
-  startTitle: string;
   isCard: boolean;
   card: ICard;
 }

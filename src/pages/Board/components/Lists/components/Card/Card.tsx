@@ -142,13 +142,7 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
             <span>{card.id}</span>
           </li>
         ) : (
-          <ModalWrapper
-            isModalVisible={isModalVisible}
-            onBackDropClick={toggleModal}
-            startTitle=""
-            isCard
-            card={card}
-          />
+          <ModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} isCard card={card} />
         );
       }}
     </MyContext.Consumer>
