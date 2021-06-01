@@ -18,11 +18,13 @@ const BoardCreate: React.FC = () => {
   const [alertState, setAlertState] = useState<IAlert>(startAlert);
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchBoards } = useActions();
-  /*   const clearInput = (): void => {
-    setTimeout(() => {
-      setTitle('');
-      setAlertState(callAlert(false, false, ''));
-    }, 5000);
+  /*   const waiting = (isMounted: boolean): void => {
+    if (isMounted) {
+      setTimeout(() => {
+        setTitle('');
+        setAlertState(callAlert(false, false, ''));
+      }, 5000);
+    }
   }; */
   const addFunction = async (): Promise<void> => {
     if (isValidTitle(title)) {
@@ -30,6 +32,7 @@ const BoardCreate: React.FC = () => {
       const res = await addItem('', newBoard);
       if (res.toString() === 'Created') {
         setAlertState(callAlert(true, false, `${SUCCESS_BOARD_NAME} Your board name is "${title}"`));
+        setTitle('');
         await fetchBoards();
       } else {
         setAlertState(callAlert(true, true, res.toString()));
@@ -37,7 +40,6 @@ const BoardCreate: React.FC = () => {
     } else {
       setAlertState(callAlert(true, true, DANGER_NAME));
     }
-    setTitle('');
   };
   const onClckHandler = async (): Promise<void> => {
     addFunction();

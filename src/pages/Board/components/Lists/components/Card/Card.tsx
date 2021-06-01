@@ -106,7 +106,7 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
           const activeElement = document.getElementById(activeCard.toString()) as HTMLLIElement;
           const currentElement = e.currentTarget as HTMLLIElement;
           const nextElement = getNextElement(e.clientY, currentElement) as HTMLLIElement;
-          console.log(nextElement.id);
+          // console.log(nextElement.id);
           // Проверяем, нужно ли менять элементы местами
           if ((nextElement && activeElement === nextElement.previousElementSibling) || activeElement === nextElement) {
             return;
@@ -114,8 +114,10 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
 
           try {
             document.getElementById(listID.toString())?.insertBefore(activeElement, nextElement);
+            console.log('bbbb');
           } catch (err) {
             document.getElementById(listID.toString())?.append(activeElement, nextElement);
+            console.log('aaaaa');
           }
         };
         const dragLeaveHandler = (): void => {
