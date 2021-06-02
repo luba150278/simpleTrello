@@ -6,7 +6,7 @@ import InputBlock from '../../../../../../components/InputBlock';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
 import { IAlert, ICard, IInput } from '../../../../../../interfaces/inrefaces';
-import ModalWrapper from '../../../../../Modal/ModalWrapper';
+import ModalWrapper from '../../../../../../components/Modal/ModalWrapper';
 import DeleteCard from './DeleteCard/DeleteCard';
 
 type Props = {
@@ -27,8 +27,11 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
   const [isAlert, setAlert] = useState<boolean>(false);
   const { editItem, fetchLists } = useActions();
   const [isModalVisible, setModalVisible] = useState(false);
-  const toggleModal = (): void => {
+  const toggleModal = (message: string): void => {
     setModalVisible((wasModalVisible) => !wasModalVisible);
+    if (message !== '') {
+      console.log('sdasdasd');
+    }
   };
   return (
     <MyContext.Consumer>
@@ -137,7 +140,7 @@ const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle
             onDragLeave={(): void => dragLeaveHandler()}
             onDragStart={(): void => dragStartHandler()}
             onDragEnter={(e): void => dragEnterHandler(e)}
-            onDoubleClick={toggleModal}
+            onDoubleClick={(): void => toggleModal('')}
           >
             <DeleteCard id={card.id} />
             <InputBlock alertState={alertState} inputData={inputData} />

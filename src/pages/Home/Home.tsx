@@ -2,6 +2,7 @@ import React from 'react';
 import { BOARDS, HOME_PAGE_DESC } from '../../common/constans/messages';
 import AddButton from './components/AddButton/AddButton';
 import Boards from './components/Boards/Boards';
+import 'react-toastify/dist/ReactToastify.css';
 
 /**
  * The page has 3 components: the "Add Board" button, the board's list, and modal window (MW) for add a new board.
@@ -18,4 +19,5 @@ const Main: React.FC = () => (
     </div>
   </section>
 );
+
 export default Main;
