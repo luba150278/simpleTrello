@@ -6,23 +6,30 @@ import InputBlock from '../../../../../../components/InputBlock';
 import { isValidTitle } from '../../../../../../functions/validTitles';
 import { useActions } from '../../../../../../hooks/useActions';
 import { IAlert, ICard, IInput } from '../../../../../../interfaces/inrefaces';
+import ModalWrapper from '../../../../../Modal/ModalWrapper';
 import DeleteCard from './DeleteCard/DeleteCard';
 
 type Props = {
   card: ICard;
   listID: number;
+  onCurrentCard: (cardID: number) => void;
+  onCurrentCardTitle: (cardTitle: string) => void;
+  activeCard: number;
 };
 type Data = {
   title: string;
   list_id: number;
 };
 
-const Card: React.FC<Props> = ({ card, listID }) => {
+const Card: React.FC<Props> = ({ card, listID, onCurrentCard, onCurrentCardTitle, activeCard }) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState<string>(card.title);
   const [isAlert, setAlert] = useState<boolean>(false);
   const { editItem, fetchLists } = useActions();
-
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = (): void => {
+    setModalVisible((wasModalVisible) => !wasModalVisible);
+  };
   return (
     <MyContext.Consumer>
       {({ boardID }): JSX.Element => {
@@ -48,6 +55,7 @@ const Card: React.FC<Props> = ({ card, listID }) => {
           }
         }
         const keyPressHandler = (event: React.KeyboardEvent): void => {
+          event.stopPropagation();
           if (event.key === 'Enter') {
             editTitle(true);
           }
@@ -74,11 +82,69 @@ const Card: React.FC<Props> = ({ card, listID }) => {
           clni: 'listTitle',
           ref: inputEl,
         };
-        return (
-          <li className="card list-item" id={card.id.toString()}>
+        const getNextElement = (cursorPosition: number, currentElement: HTMLLIElement): HTMLLIElement => {
+          // Получаем объект с размерами и координатами
+          const currentElementCoord = currentElement.getBoundingClientRect();
+          // Находим вертикальную координату центра текущего элемента
+          const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+
+          // Если курсор выше центра элемента, возвращаем текущий элемент
+          // В ином случае — следующий DOM-элемент
+          const nextElement =
+            cursorPosition < currentElementCenter
+              ? currentElement
+              : (currentElement.nextElementSibling as HTMLLIElement);
+
+          return nextElement;
+        };
+        const dragOverHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.preventDefault();
+        };
+
+        const dragEnterHandler = (e: React.DragEvent<HTMLLIElement>): void => {
+          e.preventDefault();
+          const activeElement = document.getElementById(activeCard.toString()) as HTMLLIElement;
+          const currentElement = e.currentTarget as HTMLLIElement;
+          const nextElement = getNextElement(e.clientY, currentElement) as HTMLLIElement;
+          // console.log(nextElement.id);
+          // Проверяем, нужно ли менять элементы местами
+          if ((nextElement && activeElement === nextElement.previousElementSibling) || activeElement === nextElement) {
+            return;
+          }
+
+          try {
+            document.getElementById(listID.toString())?.insertBefore(activeElement, nextElement);
+            console.log('bbbb');
+          } catch (err) {
+            document.getElementById(listID.toString())?.append(activeElement, nextElement);
+            console.log('aaaaa');
+          }
+        };
+        const dragLeaveHandler = (): void => {
+          console.log('e');
+        };
+        const dragStartHandler = (): void => {
+          onCurrentCard(card.id);
+          onCurrentCardTitle(card.title);
+        };
+
+        return !isModalVisible ? (
+          <li
+            className="card list-item"
+            id={card.id.toString()}
+            draggable
+            onDragOver={(e): void => dragOverHandler(e)}
+            onDragLeave={(): void => dragLeaveHandler()}
+            onDragStart={(): void => dragStartHandler()}
+            onDragEnter={(e): void => dragEnterHandler(e)}
+            onDoubleClick={toggleModal}
+          >
             <DeleteCard id={card.id} />
             <InputBlock alertState={alertState} inputData={inputData} />
+            <span>{card.id}</span>
           </li>
+        ) : (
+          <ModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal} isCard card={card} />
         );
       }}
     </MyContext.Consumer>
