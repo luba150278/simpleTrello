@@ -1,47 +1,52 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { ADD_BOARD, DANGER_NAME, SUCCESS_BOARD_NAME } from '../../../../common/constans/messages';
 import InputBlock from '../../../../components/InputBlock';
-import { callAlert } from '../../../../functions/callAlert';
 import { isValidTitle } from '../../../../functions/validTitles';
 import { useActions } from '../../../../hooks/useActions';
 import { IAlert, IInput } from '../../../../interfaces/inrefaces';
 import './boardCreate.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 type ITitle = {
   title: string;
 };
 
-const BoardCreate: React.FC = () => {
+type Props = {
+  onBackDropClick: (message: string) => void;
+};
+
+const BoardCreate: React.FC<Props> = ({ onBackDropClick }) => {
+  const notify = (message: string): React.ReactText =>
+    toast.error(message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   const [title, setTitle] = useState<string>('');
   const startAlert: IAlert = { isShow: false, isDanger: false, text: '' };
-  const [alertState, setAlertState] = useState<IAlert>(startAlert);
+  const [alertState] = useState<IAlert>(startAlert);
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => setTitle(event.target.value);
   const { addItem, fetchBoards } = useActions();
-  const waiting = (): void => {
-    setTimeout(() => {
-      setTitle('');
-      setAlertState(callAlert(false, false, ''));
-    }, 5000);
-  };
+
   const addFunction = async (): Promise<void> => {
     if (isValidTitle(title)) {
       const newBoard: ITitle = { title };
       const res = await addItem('', newBoard);
       if (res.toString() === 'Created') {
-        setAlertState(callAlert(true, false, `${SUCCESS_BOARD_NAME} Your board name is "${title}"`));
-
         await fetchBoards();
+        onBackDropClick(`${SUCCESS_BOARD_NAME} Your board name is "${title}"`);
       } else {
-        setAlertState(callAlert(true, true, res.toString()));
+        notify(res.toString());
       }
     } else {
-      setAlertState(callAlert(true, true, DANGER_NAME));
+      notify(DANGER_NAME);
     }
-    waiting();
-  };
-  const onClckHandler = async (): Promise<void> => {
-    addFunction();
   };
 
   const keyPressHandler = (event: React.KeyboardEvent): void => {
@@ -73,7 +78,7 @@ const BoardCreate: React.FC = () => {
     <div className="main-container">
       <InputBlock alertState={alertState} inputData={inputData} />
 
-      <button className="btn btn-success mr-2 btn-new-board" onClick={onClckHandler}>
+      <button className="btn btn-success mr-2 btn-new-board" onClick={addFunction}>
         {ADD_BOARD}
       </button>
     </div>
