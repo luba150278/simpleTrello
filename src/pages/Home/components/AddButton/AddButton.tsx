@@ -5,7 +5,7 @@ import ModalWrapper from '../../../Modal/ModalWrapper';
 const AddButton: React.FC = () => {
   const [isModalVisible, setModalVisible] = useState(false); // the state for control MV visibility
   const toggleModal = (): void => {
-    setModalVisible((wasModalVisible) => !wasModalVisible);
+    setModalVisible((oldIsVisible) => !oldIsVisible);
   };
   return (
     <div className="container my-4">
