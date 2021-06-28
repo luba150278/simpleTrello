@@ -23,6 +23,7 @@
   height: auto;
   width: 30%;
   background: rgb(240, 236, 236);
+  margin-bottom: 30px;
 }
 .listTitle {
   color: #bb2a81;
@@ -51,6 +52,7 @@
   margin: 0;
   padding: 0;
 }
+
 .card.list-item {
   display: flex;
   margin-bottom: 10px;
@@ -59,22 +61,45 @@
   align-items: center;
   background: rgb(234, 252, 171);
 }
-.slot {
-  display: none;
+.dragging {
+  background: green;
+  opacity: 1;
+  padding: 6% 44%;
+  border-radius: 4px;
+  color: #000;
+  font-weight: 700;
 }
-.card.list-item.selected {
-  display: none;
-}
-.card.list-item.selected::after {
-  display: block;
-  content: '';
+
+.slot,
+.emptyList,
+.emptyList2 {
+  display: flex;
   background: gray;
   height: 60px;
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+.emptyList2 {
+  padding: 0;
+  margin: 0;
+}
+
+.card.list-item.selected div {
+  display: none;
 }
 .card.list-item:hover {
   background: #a7ffeb;
   cursor: pointer;
+}
+.card.list-item.selected {
+  background: rgb(128, 127, 127);
+  min-height: 60px;
+}
+.card.list-item.hidden div,
+.card.list-item.hidden span {
+  display: none;
 }
 .selected {
   cursor: grabbing;
